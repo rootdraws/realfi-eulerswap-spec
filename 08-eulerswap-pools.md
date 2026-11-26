@@ -72,7 +72,9 @@ RealFi must list each pool before it can receive USDrf or sUSDrf.
 ## Pool settings on the fork
 
 The fork used a flat curve, sUSDrf priced at RealFi's rate, a 0.30% fee and 100k sUSDrf per pool
-([`Pools.s.sol`](sources/fork/script/Pools.s.sol)). The mainnet fee and owner are not chosen yet. The price does not
-move on its own, so a manager or fee hook must track RealFi's rate.
+([`Pools.s.sol`](sources/fork/script/Pools.s.sol)). The mainnet fee and owner are not chosen yet. The fork's price was
+fixed at deploy. On mainnet a swap hook tracks RealFi's rate with no keeper: EulerSwap calls its `getFee` on every swap
+([`QuoteLib.sol` L20-L29](https://github.com/euler-xyz/euler-swap/blob/dd936d2baaacb9064cf919b1fb45ecaa002d2751/src/libraries/QuoteLib.sol#L20-L29)), and its `afterSwap` moves the pool's price when the rate drifts. The shMON exit desk
+on Monad runs this pattern today.
 
 [^health]: Checked on the fork: the RealFi USDC pool's account held 342,325 sUSDrf, which Euler values at $392,966 after the 90% LTV (`accountLiquidity`), against 304,334 USDC of debt. Prices from the RealFi router's `getQuote`.
