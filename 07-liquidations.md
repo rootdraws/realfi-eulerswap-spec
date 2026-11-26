@@ -22,3 +22,8 @@ section 4).
 A shared contract lends capital to the liquidator inside one transaction. The transaction reverts unless more than the
 loan comes back by its end. Fabio described it on the call of 2026-11-25: "we only do a drawdown in the event that in
 the exact same block you guys get more money returned." It is not built yet.
+
+The EulerSwap pools already gate trades this way. A swap pays out first, calls back the receiver, and reverts unless the
+pool is paid by the end ([`EulerSwap.sol` L122-L153](https://github.com/euler-xyz/euler-swap/blob/dd936d2baaacb9064cf919b1fb45ecaa002d2751/src/EulerSwap.sol#L122-L153)). A liquidator can take USDrf or USDC
+from a pool, liquidate, and pay the pool back with the seized sUSDrf in one transaction. A `beforeSwap` hook can limit
+which callers may do this ([`SwapLib.sol` L90-L95](https://github.com/euler-xyz/euler-swap/blob/dd936d2baaacb9064cf919b1fb45ecaa002d2751/src/libraries/SwapLib.sol#L90-L95)).
