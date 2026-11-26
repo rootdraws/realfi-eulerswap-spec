@@ -18,7 +18,7 @@ names, and to a dead-man health check. The full list is in [`RISK-ALERTS.md`](so
 
 A pause blocks new risk but leaves every exit that reduces risk open.
 
-## Not covered yet
+## Not monitored yet
 
 - No service watches the EulerSwap pools yet. The checks to add are each pool's loan health, the cash left in its borrow
   vault, and how long RealFi takes to repay.

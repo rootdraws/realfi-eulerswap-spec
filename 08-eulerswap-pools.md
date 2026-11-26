@@ -43,7 +43,7 @@ On the fork, one transaction sold 800k sUSDrf this way for 1,008,667 USDC ([10](
 
 A separate USDC EVK vault designated as a primary swap venue keeps other borrowers from using up that cash.
 
-## Unwind
+## Repaying the loans
 
 Buyers of sUSDrf repay the loans directly. Otherwise:
 
