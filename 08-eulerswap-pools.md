@@ -48,9 +48,9 @@ sUSDrf:[^health]
 
 At 90%, the borrow limit, a 2.2% fall in Euler's sUSDrf price reaches liquidation.
 
-## Repaying the loans
+## Repaying the loans without buyers
 
-Loops buying sUSDrf repay the loans. Without buyers, the pool's owner unstakes the sUSDrf: 7 days for a USDrf loan, or at
+The pool's owner unstakes the sUSDrf: 7 days for a USDrf loan, or at
 once if RealFi lists the owner for instant unstake. A USDC loan then also waits for RealFi's Safe to approve the redemption, with no SLA
 ([`OPEN-ITEMS.md`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/docs/OPEN-ITEMS.md) E7).
 
