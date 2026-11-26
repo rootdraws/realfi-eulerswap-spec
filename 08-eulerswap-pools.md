@@ -36,9 +36,12 @@ Fynd splits a large sale between the RealFi and RWA pools in one transaction, dr
 A pool pays 99.7% of value but borrows at most 90%, so it must hold some sUSDrf of its own. For a pool that buys 1M
 sUSDrf:[^health]
 
-- A sUSDrf <> USDC pool holds 98k sUSDrf to sit at the 90% borrow limit, or 236k to sit at 80%.
-- A sUSDrf <> USDrf pool holds 110k sUSDrf to sit at 90%, or 248k to sit at 80%.
-- At 90% the pool is a 2.2% fall in Euler's sUSDrf price from liquidation.
+| Pool | Own sUSDrf at 90% LTV | Own sUSDrf at 80% LTV |
+|---|---|---|
+| sUSDrf <> USDC | 98k | 236k |
+| sUSDrf <> USDrf | 110k | 248k |
+
+At 90%, the borrow limit, a 2.2% fall in Euler's sUSDrf price reaches liquidation.
 
 ## Repaying the loans
 
