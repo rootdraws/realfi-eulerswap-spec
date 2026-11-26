@@ -23,7 +23,6 @@ script refuses to run against anything but the fork.
 | Sell 300k USDrf into each USDrf pool in one router call | Paid 598,200 USDC; each pool borrowed 299,100 USDC |
 | Sell 700k USDrf into one pool | Reverted: the pool could take 400k |
 | Sell 700k USDrf split across both clusters' pools in one call | Paid 697,900 USDC |
-| Swap first, pay after, through the Universal Router | Reverted: Uniswap held no USDrf to hand the pool |
 
 ### What the fork test changed from the live settings
 

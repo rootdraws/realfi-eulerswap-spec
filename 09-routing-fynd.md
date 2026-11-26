@@ -2,11 +2,8 @@
 
 ## Routers
 
-An EulerSwap pool needs the seller's token paid into Uniswap before the swap runs. Tycho's router, which Fynd uses, pays
-first and works; Uniswap's own SDK swaps first on a plain v4 trade and fails.[^order]
-
-One router call can split a trade across pools. On the fork, 700k USDrf into one pool reverted, and the same 700k split
-across the RealFi and RWA pools paid 697,900 USDC.
+Trades reach the pools through Fynd, which sends them through Tycho's router. That router pays the seller's token into
+Uniswap before each swap, which EulerSwap pools need, and splits one trade across several pools.[^order]
 
 ## Fynd
 
@@ -76,7 +73,7 @@ gains. A firm that charges others for routing through Fynd owes Propeller Heads 
 - Choose who owns the pool accounts, and the fee.
 - Add pool checks to the monitor (see [05-alerts.md](05-alerts.md)).
 
-[^order]: `euler-swap/src/UniswapHook.sol` line 111; Tycho `tycho-execution/contracts/src/executors/UniswapV4Executor.sol` line 366; Uniswap SDK `universal-router-sdk/src/entities/actions/uniswap.ts` lines 516 and 517.
+[^order]: `euler-swap/src/UniswapHook.sol` line 111; Tycho `tycho-execution/contracts/src/executors/UniswapV4Executor.sol` line 366.
 [^fynd]: `~/tycho/fynd/README.md`; EulerSwap v2 recognition in `fynd/Cargo.toml` line 232.
 [^api]: `fynd/docs/get-started/hosted-api.md` (address, key, beta terms); `fynd/README.md` (self-hosted quickstart); endpoints in `fynd-rpc/src/api/handlers.rs` line 43 onward and `fynd-rpc/src/api/docs.rs`; request options in `fynd-rpc-types/src/lib.rs` lines 523 to 557.
 [^lic]: `fynd/LICENSE.md` sections 1.11 (own-capital trading), 1.13 and 1.15 (a paid service owes 20%).

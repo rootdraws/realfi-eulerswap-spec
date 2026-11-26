@@ -71,9 +71,7 @@ holding liquidity in Uniswap.[^es]
   deposit or a new loan.
 - Euler checks the account's health once, at the end, and the swap reverts if the loan limit is broken.
 
-One property matters for routing: the hook pulls the real input tokens out of Uniswap during the swap. Uniswap holds no
-USDrf of its own, so a router must pay the USDrf in before the swap runs. [09-routing-fynd.md](09-routing-fynd.md)
-covers which routers do.
+Routers must pay the input in before the swap. Fynd's router does ([09-routing-fynd.md](09-routing-fynd.md)).
 
 [^oz]: `RealFiStructures/contracts/hooks/USDrfPoolHook.sol` lines 30 to 54 (imports and extends `ReHypothecationHookUpgradeable`); `contracts/hooks/vendor/oz-uniswap-hooks/PORT.md`; OpenZeppelin's `uniswap-hooks/src/general/ReHypothecationHook.sol` and `LimitOrderHook.sol`; a search of `contracts/hooks/` finds no use of `LimitOrderHook`. The Monad exit desk's hook: `0x94Df2bffA788BBd918179f4CCB5A22DbAD7e1040` on Monad, OpenZeppelin `LimitOrderHook` from uniswap-hooks 1.3.0.
 [^hook]: `RealFiStructures/docs/AUDIT-NOTES.md` sections 3.1 to 3.5 and 6.
