@@ -14,7 +14,7 @@ Deviation 0.5%, heartbeat 12 h (RedStone's stated parameters).
 
 - Both routers use both adapters; USDC is fixed at $1.
 - Stale feed: borrows revert; repay and withdraw work (`ag-euler/contracts/realfi-ethereum/deploy.sh smoke`).
-- Build 1 NAV prices sUSDrf by `convertToAssets`, not the feed; Euler's LTV uses the feed (`AUDIT-NOTES.md` section 2.2,
+- Build 1 NAV prices sUSDrf by `convertToAssets`, not the feed; Euler's LTV uses the feed ([`AUDIT-NOTES.md`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/docs/AUDIT-NOTES.md) section 2.2,
   item 20 of 2.4).
 - RealFi loss booking is uncapped in code (E33); monitor pages `SUSDRF_LOSS`.
 

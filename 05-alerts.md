@@ -19,4 +19,4 @@ A pause blocks new risk and keeps every exit that lowers it open.
 - **Outside monitoring.** None of our three repos (RealFiStructures, ag-euler, alphastructures) sets up Hypernative or
   another outside monitor.
 
-[^alerts]: `RealFiStructures/docs/RISK-ALERTS.md` at `fb29ef6`; tick length in `deploy/configs/mainnet/runtime.json` (`tickMs` 12000).
+[^alerts]: [`RealFiStructures/docs/RISK-ALERTS.md`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/docs/RISK-ALERTS.md) at `fb29ef6`; tick length in [`deploy/configs/mainnet/runtime.json`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/deploy/configs/mainnet/runtime.json) (`tickMs` 12000).

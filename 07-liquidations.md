@@ -22,4 +22,4 @@ Fabio, on the call of 2026-11-25: "we only do a drawdown in the event that in th
 money returned." This contract is not built yet.
 
 [^liq]: `euler-vault-kit/src/EVault/modules/Liquidation.sol` lines 120 to 150. Read at block 26,496,053: `maxLiquidationDiscount()` 1500 and `liquidationCoolOffTime()` 1 on eUSDrf-1, eUSDrf-2 and eUSDC-143.
-[^b3]: `RealFiStructures/docs/AUDIT-NOTES.md` sections 4.1 and 4.2.
+[^b3]: [`RealFiStructures/docs/AUDIT-NOTES.md`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/docs/AUDIT-NOTES.md) sections 4.1 and 4.2.

@@ -48,11 +48,11 @@ These exist only on the 2026-11-25 fork and will differ on mainnet.
 
 | Document | Where |
 |---|---|
-| Fabio's audit notes, roles and findings | `RealFiStructures/docs/AUDIT-NOTES.md` |
-| Alerts and emergency controls | `RealFiStructures/docs/RISK-ALERTS.md` |
-| Deploy parameters | `RealFiStructures/docs/DEPLOY.md` |
-| Operator runbook | `RealFiStructures/docs/RUNBOOK.md` |
-| Open questions for RealFi and us | `RealFiStructures/docs/OPEN-ITEMS.md` |
+| Fabio's audit notes, roles and findings | [`RealFiStructures/docs/AUDIT-NOTES.md`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/docs/AUDIT-NOTES.md) |
+| Alerts and emergency controls | [`RealFiStructures/docs/RISK-ALERTS.md`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/docs/RISK-ALERTS.md) |
+| Deploy parameters | [`RealFiStructures/docs/DEPLOY.md`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/docs/DEPLOY.md) |
+| Operator runbook | [`RealFiStructures/docs/RUNBOOK.md`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/docs/RUNBOOK.md) |
+| Open questions for RealFi and us | [`RealFiStructures/docs/OPEN-ITEMS.md`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/docs/OPEN-ITEMS.md) |
 | Euler vault deploy script | `ag-euler/contracts/realfi-ethereum/deploy.sh` |
 | EulerSwap source and audits | [euler-xyz/euler-swap](https://github.com/euler-xyz/euler-swap) |
 | Tycho router source and audits | [propeller-heads/tycho-execution](https://github.com/propeller-heads/tycho-execution) |

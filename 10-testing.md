@@ -26,4 +26,4 @@ Deviations from live config: profit receiver set to the Safe; deploy check accep
 check expects 5%); balances written to storage.
 
 Fabio's suites (unit, fork, fuzz, invariant, Sepolia conformance): `RealFiStructures/README.md`; property to test map in
-`AUDIT-NOTES.md`.
+[`AUDIT-NOTES.md`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/docs/AUDIT-NOTES.md).

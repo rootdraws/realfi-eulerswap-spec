@@ -26,19 +26,19 @@ Euler Vault Kit proxies from Euler's factory, deployed 2026-11-20, governed by t
 ## Built, not deployed:
 
 Upgradeable (UUPS, no timelock); solc 0.8.35; OpenZeppelin 5.4.0. Full design, roles, limitations and findings:
-`RealFiStructures/docs/AUDIT-NOTES.md`.
+[`RealFiStructures/docs/AUDIT-NOTES.md`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/docs/AUDIT-NOTES.md).
 
 | Build | Contracts |
 |---|---|
-| 1. Loop vault | `core/*`, `adapters/realfi/RealFiAdapter.sol`, `UnstakeEscrow.sol`, `adapters/market/EulerMarketAdapter.sol` |
-| 2. Pool hooks | `hooks/USDrfPool{Hook,Treasury}.sol`, `hooks/SUSDrfPool{Hook,Treasury}.sol`, `JitPoolQuoter.sol`, `hooks/vendor/oz-uniswap-hooks/` |
-| 3. Liquidator | `liquidator/RealFiLiquidator.sol` |
+| 1. Loop vault | [`core/*`](https://github.com/alphagrowth/RealFiStructures/tree/fb29ef6d1aab554e78905a6410e03ef03ad00456/contracts/core), [`adapters/realfi/RealFiAdapter.sol`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/contracts/adapters/realfi/RealFiAdapter.sol), `UnstakeEscrow.sol`, [`adapters/market/EulerMarketAdapter.sol`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/contracts/adapters/market/EulerMarketAdapter.sol) |
+| 2. Pool hooks | [`hooks/USDrfPool{Hook,Treasury}.sol`](https://github.com/alphagrowth/RealFiStructures/tree/fb29ef6d1aab554e78905a6410e03ef03ad00456/contracts/hooks), [`hooks/SUSDrfPool{Hook,Treasury}.sol`](https://github.com/alphagrowth/RealFiStructures/tree/fb29ef6d1aab554e78905a6410e03ef03ad00456/contracts/hooks), `JitPoolQuoter.sol`, [`hooks/vendor/oz-uniswap-hooks/`](https://github.com/alphagrowth/RealFiStructures/tree/fb29ef6d1aab554e78905a6410e03ef03ad00456/contracts/hooks/vendor/oz-uniswap-hooks) |
+| 3. Liquidator | [`liquidator/RealFiLiquidator.sol`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/contracts/liquidator/RealFiLiquidator.sol) |
 
 ## Reviews
 
 | Code | Reports |
 |---|---|
-| Builds 1 to 3 | No external audit. Internal reviews Oct 24 to Nov 18: 91 findings (3 H, 7 M, 39 L, 42 I), all H fixed; register in `AUDIT-NOTES.md` section 8. Slither Oct 28. |
+| Builds 1 to 3 | No external audit. Internal reviews Oct 24 to Nov 18: 91 findings (3 H, 7 M, 39 L, 42 I), all H fixed; register in [`AUDIT-NOTES.md`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/docs/AUDIT-NOTES.md) section 8. Slither Oct 28. |
 | Euler Vault Kit | [`euler-vault-kit/audits`](https://github.com/euler-xyz/euler-vault-kit/tree/master/audits): Certora, ChainSecurity, Spearbit, OpenZeppelin, Omniscia, Enigma Dark, yAudit, Cantina |
 | Euler price adapters | [`euler-price-oracle/audits`](https://github.com/euler-xyz/euler-price-oracle/tree/master/audits): ChainSecurity, OpenZeppelin, Spearbit, Omniscia, yAudit, BailSec, Electisec, Cantina |
 | EulerSwap v2 | [`euler-swap/audits`](https://github.com/euler-xyz/euler-swap/tree/master/audits): Cyfrin, ChainSecurity, Cantina |

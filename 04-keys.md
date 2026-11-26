@@ -22,7 +22,7 @@ Owners: `0x04805982AaA97e6632d1B73d0C004A6f0c02E2D9`, `0xF20cC34f6DEF058Bf79fd55
 | Guardian | Server key, monitor only | Pause; lift its own pause | Lift an admin pause, halt, upgrade, move funds |
 | Liquidator bot (`EXECUTOR_ROLE`) | Server key | Pick violators, sizes, whitelisted routes | Unlisted markets or routers; unprofitable liquidations |
 
-Sources: `AUDIT-NOTES.md` sections 2.2, 3.2, 4.2; key rotation in `docs/RUNBOOK.md` "Rotating a key".
+Sources: [`AUDIT-NOTES.md`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/docs/AUDIT-NOTES.md) sections 2.2, 3.2, 4.2; key rotation in [`docs/RUNBOOK.md`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/docs/RUNBOOK.md) "Rotating a key".
 
 ## EulerSwap pool accounts
 
@@ -32,4 +32,4 @@ chosen.
 ## RealFi
 
 Our contracts depend on RealFi's listings and roles; assumptions T1 to T8 and open item E32 (RealFi admin roles on
-multisigs) in `AUDIT-NOTES.md` section 2.2.
+multisigs) in [`AUDIT-NOTES.md`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/docs/AUDIT-NOTES.md) section 2.2.

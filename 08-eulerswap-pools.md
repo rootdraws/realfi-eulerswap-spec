@@ -36,7 +36,7 @@ Buyers of sUSDrf repay the loans directly. Otherwise:
 
 | Loan | Repaid by | Time |
 |---|---|---|
-| USDC | Unstake, then USDrf redemption | 7 days, then RealFi Safe approval; no SLA (`OPEN-ITEMS.md` E7) |
+| USDC | Unstake, then USDrf redemption | 7 days, then RealFi Safe approval; no SLA ([`OPEN-ITEMS.md`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/docs/OPEN-ITEMS.md) E7) |
 | USDrf | Unstake | 7 days; immediate if RealFi lists the account's owner contract for instant unstake |
 
 RealFi must list each pool on its access list before it can receive USDrf or sUSDrf.

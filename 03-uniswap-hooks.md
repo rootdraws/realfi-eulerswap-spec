@@ -18,11 +18,11 @@
 | Upgrades | None | UUPS; admin, same contract id, higher `VERSION` |
 | Seeding | Open | Admin-only first seed |
 
-Sources: `contracts/hooks/USDrfPoolHook.sol` lines 30 to 54; port diff in `hooks/vendor/oz-uniswap-hooks/PORT.md`
-(upstream commit `b5f10574`, file hashes); overrides in `AUDIT-NOTES.md` section 6; design in sections 3.1 to 3.5.
+Sources: [`contracts/hooks/USDrfPoolHook.sol`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/contracts/hooks/USDrfPoolHook.sol#L30-L54) lines 30 to 54; port diff in [`hooks/vendor/oz-uniswap-hooks/PORT.md`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/contracts/hooks/vendor/oz-uniswap-hooks/PORT.md)
+(upstream commit `b5f10574`, file hashes); overrides in [`AUDIT-NOTES.md`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/docs/AUDIT-NOTES.md) section 6; design in sections 3.1 to 3.5.
 
-Accepted risk on pool 2: a swapper who front-runs a RealFi loss booking takes ~$261 from a 60k/60k pool per 0.5% loss
-(`AUDIT-NOTES.md` section 3.5).
+Accepted risk on pool 2: a swapper who front-runs a RealFi loss booking gains at the LPs' expense
+([`AUDIT-NOTES.md`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/docs/AUDIT-NOTES.md) section 3.5).
 
 ## EulerSwap `UniswapHook`
 
