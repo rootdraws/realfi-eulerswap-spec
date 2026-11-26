@@ -24,26 +24,15 @@ push feed.
 
 Both Euler routers, the RealFi cluster's and the RWA cluster's, use these two adapters. USDC is priced at a fixed $1.
 
-The 13-hour limit is one missed 12-hour update plus an hour. Past it, every price read reverts:
-
-- New borrowing against USDrf or sUSDrf stops.
-- Repaying a loan and withdrawing a deposit still work.
-
-The fork test in `ag-euler/contracts/realfi-ethereum/deploy.sh smoke` runs this case: after 13 hours with no update, a
-new borrow reverts, while a repayment and a lender's withdrawal go through.
+Past 13 hours with no update, new borrowing stops, while repayments and withdrawals still work. A fork test
+(`ag-euler/contracts/realfi-ethereum/deploy.sh smoke`) ran this case.
 
 ## How the loop vault reads them
 
 The loop vault values itself differently from Euler. It prices USDrf from the same RedStone USDrf feed, but prices
 sUSDrf through RealFi's own rate (1 sUSDrf = 1.264 USDrf on chain), not through the sUSDrf feed.[^nav]
 
-So two numbers can differ:
-
-- **Euler's view** of the vault's sUSDrf follows the RedStone sUSDrf feed, and it decides the vault's loan health and
-  any liquidation.
-- **The vault's share price** follows RealFi's rate.
-
-Fabio's monitor alerts when either feed goes stale or when the vault's share price jumps more than 0.5% in one tick.
+Euler's sUSDrf price decides the vault's loan health and any liquidation; RealFi's rate decides its share price.
 
 ## What RealFi controls
 

@@ -1,41 +1,24 @@
-# 9. Routing and Fynd
+# 9. Fynd
 
-## Routers
+Trades reach the pools through Fynd, a route finder by Propeller Heads. It reads every pool's state each block, splits a
+trade across the pools that pay most, and returns a transaction for Tycho's router. That router pays the input into
+Uniswap before each swap, which EulerSwap pools need.[^order]
 
-Trades reach the pools through Fynd, which sends them through Tycho's router. That router pays the seller's token into
-Uniswap before each swap, which EulerSwap pools need, and splits one trade across several pools.[^order]
-
-## Fynd
-
-Fynd is a route finder built on Tycho by Propeller Heads. It reads every pool's state each block, finds the split across
-pools that pays most after gas, and builds the transaction for Tycho's router.[^fynd]
-
-- **Our copy** at `~/tycho/fynd` already recognizes EulerSwap v2 pools. It is built for Base and is not running now, so it
-  needs Tycho's Ethereum data to serve these pools.
-- **A partner's copy** can run anywhere. It reads Propeller Heads' hosted Tycho data with a free Tycho API key.
-- **The API** is an HTTP server, so we can run one for our own use and a partner can run its own.
-
-### The Fynd API
-
-There are two ways to reach Fynd, and both take the same request and return the same answer.[^api]
+## The API
 
 | | Hosted by Propeller Heads | Self-hosted |
 |---|---|---|
 | Address | `https://fynd-api.propellerheads.xyz/v1/ethereum/...` | `http://<host>:3000/v1/...` after `fynd serve --chain ethereum` |
-| Login | A Fynd API key from the `@fynd_portal_bot` Telegram bot, sent as the raw `Authorization` header | None |
-| Pools it sees | Tycho's default protocol set | Whatever its Tycho data indexes |
+| Login | A key from the `@fynd_portal_bot` Telegram bot, sent as the raw `Authorization` header | None |
 | Uptime promise | None while in beta | Your own |
-
-The endpoints:
 
 | Call | What it does |
 |---|---|
-| `POST /v1/quote` | Finds the best route for one or more orders and, if asked, returns a ready-to-send transaction |
-| `GET /v1/health` | Says whether the solver is ready and how fresh its market data is |
+| `POST /v1/quote` | Finds the best route and, if asked, returns a ready-to-send transaction |
+| `GET /v1/health` | Says whether the solver is ready and how fresh its data is |
 | `GET /v1/info` | Describes the running solver |
-| `/docs` | Interactive API docs on a self-hosted server |
 
-A quote to sell 100k USDrf for USDC, with the transaction included:
+Selling 100k USDrf for USDC:[^api]
 
 ```bash
 curl -X POST https://fynd-api.propellerheads.xyz/v1/ethereum/quote \
@@ -52,28 +35,24 @@ curl -X POST https://fynd-api.propellerheads.xyz/v1/ethereum/quote \
   }'
 ```
 
-The answer gives the expected output, the route across pools, and the transaction for Tycho's router. Two options matter
-here:
+- **`simulate`** runs the transaction against the latest block before Fynd returns it.
+- **`pool_manager_unlocked`** lets a contract already inside a Uniswap v4 call, such as a liquidator, run the route
+  inside its own call.
 
-- **`simulate`:** Fynd runs the transaction against the latest block before returning it.
-- **`pool_manager_unlocked`:** for a caller already inside a Uniswap v4 call, such as a liquidator contract. Fynd's
-  Uniswap legs then settle inside the caller's own call.
+Our copy of Fynd carries a patch, added 2026-10-21, so that it reads EulerSwap v2 pools. Whether the hosted API reads
+them is not confirmed.
 
-Whether the hosted API routes through our EulerSwap pools is not confirmed. Our copy of Fynd carries a patch, added
-2026-10-21, so that Tycho recognizes EulerSwap v2 hooks.
+## License
 
-### License
+A firm trading its own capital through Fynd owes Propeller Heads nothing. A firm that charges others for routing through
+Fynd owes Propeller Heads 20% of that revenue.[^lic]
 
-Fynd's license lets anyone run and change it. A firm trading its own capital owes Propeller Heads nothing on those
-gains. A firm that charges others for routing through Fynd owes Propeller Heads 20% of that revenue.[^lic]
+## Left to build
 
-## What is left to build
-
-- Point Fynd at Ethereum and confirm it finds all six pools and splits across them.
+- Run Fynd on Ethereum and confirm it routes across all six pools.
 - Choose who owns the pool accounts, and the fee.
-- Add pool checks to the monitor (see [05-alerts.md](05-alerts.md)).
+- Add the pool checks to the monitor ([05](05-alerts.md)).
 
 [^order]: `euler-swap/src/UniswapHook.sol` line 111; Tycho `tycho-execution/contracts/src/executors/UniswapV4Executor.sol` line 366.
-[^fynd]: `~/tycho/fynd/README.md`; EulerSwap v2 recognition in `fynd/Cargo.toml` line 232.
-[^api]: `fynd/docs/get-started/hosted-api.md` (address, key, beta terms); `fynd/README.md` (self-hosted quickstart); endpoints in `fynd-rpc/src/api/handlers.rs` line 43 onward and `fynd-rpc/src/api/docs.rs`; request options in `fynd-rpc-types/src/lib.rs` lines 523 to 557.
-[^lic]: `fynd/LICENSE.md` sections 1.11 (own-capital trading), 1.13 and 1.15 (a paid service owes 20%).
+[^api]: `fynd/docs/get-started/hosted-api.md`; `fynd/README.md`; `fynd-rpc/src/api/handlers.rs` line 43 onward; `fynd-rpc-types/src/lib.rs` lines 523 to 557; the patch in `fynd/Cargo.toml` line 232.
+[^lic]: `fynd/LICENSE.md` sections 1.11, 1.13 and 1.15.

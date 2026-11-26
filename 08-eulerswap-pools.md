@@ -1,7 +1,7 @@
 # 8. The lender-funded EulerSwap pools
 
-Six pools, three in each Euler cluster. Each buys a RealFi token and pays the seller with a loan from that cluster's
-vault. They run Euler's EulerSwap v2, deployed by Euler on Ethereum, with only our settings.[^es]
+Six pools, three in each Euler cluster, running Euler's EulerSwap v2 with our settings. Each buys a RealFi token and
+pays the seller with a loan from that cluster's vault.[^es]
 
 | Pool | Buys | Pays | Collateral goes to | Loan comes from |
 |---|---|---|---|---|
@@ -44,14 +44,6 @@ Three things cap how much one pool can buy:
 2. **The lending vault's cash.** A pool can borrow only what lenders have deposited and nobody else has borrowed.
 3. **The cushion.** Pool A pays 99.7% of value but may borrow only 93% of it, so the pool account's own collateral
    must cover the gap. A bigger cushion lets a pool buy more before its loan limit stops it.
-
-On the fork, EulerSwap's periphery (`getLimits`) reported these limits:
-
-| Pool | Most it would take in |
-|---|---|
-| RealFi A and RWA A | 400k USDrf |
-| RealFi B and RWA B | 1.8M sUSDrf |
-| RealFi C and RWA C | 1.27M sUSDrf |
 
 ## What repays the loans
 

@@ -5,9 +5,7 @@
 RealFi issues two tokens on Ethereum:
 
 - **USDrf**, a dollar token minted 1:1 for USDC and redeemed 1:1 for USDC.
-- **sUSDrf**, staked USDrf. It earns RealFi's yield, and leaving it takes a 7-day cooldown.
-
-On chain, sUSDrf's cooldown reads 604,800 seconds (7 days), and 1 sUSDrf is worth 1.264 USDrf.[^realfi]
+- **sUSDrf**, staked USDrf. It earns RealFi's yield, is worth 1.264 USDrf today, and takes 7 days to unstake.[^realfi]
 
 ## What AlphaGrowth built around it
 
@@ -18,7 +16,7 @@ On chain, sUSDrf's cooldown reads 604,800 seconds (7 days), and 1 sUSDrf is wort
 | Pool hooks (Build 2) | Two Uniswap v4 pools, USDrf/USDC and sUSDrf/USDrf, whose LP money is lent out between swaps | Built and tested; not on mainnet |
 | Liquidator (Build 3) | Liquidates unhealthy loans in our markets in one transaction | Built and tested; not on mainnet |
 | EulerSwap pools | Six pools that buy USDrf or sUSDrf and pay with a loan from our Euler vaults | Proposed; tested on a mainnet fork |
-| Fynd | A route finder that sends each trade through whichever pools pay most, reached over an HTTP API | Proposed; Propeller Heads hosts it, and anyone can run their own ([09](09-routing-fynd.md#the-fynd-api)) |
+| Fynd | Routes each trade through whichever pools pay most | Proposed; hosted by Propeller Heads or self-run ([09](09-routing-fynd.md)) |
 
 ## Why lenders fund the pools
 
@@ -33,10 +31,6 @@ RealFi's own exits then repay the loan:
 - USDrf is redeemed 1:1 for USDC.
 - sUSDrf is unstaked to USDrf after its cooldown.
 
-## Who uses it
-
-Anyone who needs to move between USDC, USDrf and sUSDrf, in any direction: traders, the loop vault when it unwinds, and
-liquidators who seize sUSDrf and need USDrf or USDC to repay a loan. Fynd sends each trade to the pools that pay most,
-and splits it across several when one is not deep enough.
+Traders, the loop vault and liquidators all reach the pools through Fynd.
 
 [^realfi]: sUSDrf `0x8f4507d315acf966Fe21F9f4feE4F7e1A6d4c400`: `cooldown()` = 604800 and `convertToAssets(1e6)` = 1,264,048, block 26,496,053.

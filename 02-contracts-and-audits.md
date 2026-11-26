@@ -14,9 +14,6 @@ factory, so no contract here was written by us.[^vaults]
 | eUSDrf-2 | `0xEf240d6f1f2373bE393153F3125a3B514b204775` | RealFi cluster | Lends USDrf against sUSDrf and USDC |
 | eUSDC-143 | `0x3c089C265A86eCFB9BA6D5a3EFBE27eABa29E6c4` | RealFi cluster | Lends USDC against sUSDrf and USDrf |
 
-The RealFi cluster prices through its own Euler router `0x6eE2056AD473D46efAdCDA12529686D60d0E775B`. The RWA cluster's
-router `0x3643E21087B7a6D3128AB4Ba35310ba0E7628504` belonged to the AlphaGrowth Safe before RealFi was added.
-
 | Setting | Value |
 |---|---|
 | Borrow limit and liquidation line, against USDrf | 93% and 95% |
@@ -41,9 +38,7 @@ on mainnet yet: the repo's mainnet deployment record is empty.
 | 2. Pool hooks | `hooks/USDrfPoolHook.sol`, `USDrfPoolTreasury.sol`, `SUSDrfPoolHook.sol`, `SUSDrfPoolTreasury.sol`, `JitPoolQuoter.sol`, and OpenZeppelin's uniswap-hooks 1.3.0-rc.0 ported to upgradeable | about 4,600, plus interfaces | Yes, with no timelock |
 | 3. Liquidator | `liquidator/RealFiLiquidator.sol` | about 750 | Yes, with no timelock |
 
-How each works, what each role can and cannot do, every known limitation and every finding are in Fabio's audit notes,
-`docs/AUDIT-NOTES.md` (736 lines). The EulerSwap pools in [08-eulerswap-pools.md](08-eulerswap-pools.md) are Euler's
-contract, deployed by Euler's factory, with only our settings.
+Fabio's audit notes, `docs/AUDIT-NOTES.md`, cover how each works, every role, every known limitation and every finding.
 
 ## Who has reviewed what
 

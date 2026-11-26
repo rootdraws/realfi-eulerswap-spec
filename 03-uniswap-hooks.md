@@ -1,7 +1,5 @@
 # 3. The Uniswap v4 hooks
 
-Three hook designs touch USDrf on Uniswap v4. Two are Fabio's, and one is Euler's.
-
 | Hook | Pool | Built on | Written by | Outside audit |
 |---|---|---|---|---|
 | `USDrfPoolHook` and `USDrfPoolTreasury` | USDrf/USDC (pool 1) | OpenZeppelin `ReHypothecationHook` | Fabio | No |
@@ -41,25 +39,13 @@ instead keeps liquidity in outside vaults and adds it to the pool only for the l
 | Upgrades | None; a plain contract | Behind an upgradeable proxy: an upgrade needs the admin, the same contract name and a higher version |
 | Seeding and LP deposits | Open to anyone | The first seed is admin-only, and deposits stop while paused |
 
-Fabio's port changes only what an upgradeable proxy needs (no constructors, storage in a named slot). His
-`PORT.md` lists the sha256 of each upstream file and every changed line, and section 6 of his audit notes lists each
-function the hooks replace.
+The port to upgradeable contracts is listed line by line in `hooks/vendor/oz-uniswap-hooks/PORT.md`.
 
 ### Review status
 
-There is no outside audit. Fabio's internal reviews found 3 high issues in the pool hooks, all fixed, and the rest are
-logged with their status and tests in `docs/AUDIT-NOTES.md` section 8.
-
-The hooks are built on OpenZeppelin's uniswap-hooks 1.3.0-rc.0, ported to upgradeable contracts. OpenZeppelin audited
-`BaseHook`, `BaseOverrideFee` and `CurrencySettler` in its v1.0 and v1.1. It never audited `ReHypothecationHook`, the
-base these hooks extend. `hooks/vendor/oz-uniswap-hooks/PORT.md` lists every changed line.
-
-Accepted risks Fabio measured and wrote down include:
-
-- **Loss front-running on pool 2:** someone who sees RealFi book a loss can sell sUSDrf to the LPs at the old price
-  first. On a 60k/60k pool, a 0.5% loss lets them take about $261 from the LPs.
-- **Thin venues on pool 1:** a round trip can pay up to about $750 when the USDrf lending vault is nearly fully
-  borrowed.
+OpenZeppelin never audited `ReHypothecationHook`, the base these hooks extend; it audited `BaseHook`, `BaseOverrideFee`
+and `CurrencySettler` in v1.0 and v1.1. One accepted risk is specific to pool 2: someone who sees RealFi book a loss can
+sell sUSDrf to the LPs at the old price first, about $261 on a 60k/60k pool for a 0.5% loss.
 
 ## Euler's EulerSwap hook
 

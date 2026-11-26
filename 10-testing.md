@@ -20,9 +20,8 @@ script refuses to run against anything but the fork.
 |---|---|
 | Quote 100k USDrf into each USDrf pool | 99,700 USDC: fair value less the 0.30% fee |
 | Quote 100k sUSDrf into each sUSDrf pool | 125,984 USDC or USDrf: RealFi's rate less 0.30% |
-| Sell 300k USDrf into each USDrf pool in one router call | Paid 598,200 USDC; each pool borrowed 299,100 USDC |
 | Sell 700k USDrf into one pool | Reverted: the pool could take 400k |
-| Sell 700k USDrf split across both clusters' pools in one call | Paid 697,900 USDC |
+| Sell 700k USDrf split across both clusters' pools in one call | Paid 697,900 USDC; each pool borrowed 348,950 USDC |
 
 ### What the fork test changed from the live settings
 
