@@ -6,28 +6,26 @@
 | `SUSDrfPoolHook` + `SUSDrfPoolTreasury` | sUSDrf/USDrf | OZ `ReHypothecationHook` v1.3.0-rc.0 | No |
 | EulerSwap v2 `UniswapHook` | the four pools in [08](08-eulerswap-pools.md) | Euler | Yes ([02](02-contracts-and-audits.md)) |
 
-## Building on OZ Hooks: 
+## Building on OZ Hooks:
 
-| | OZ upstream | Fabio's hooks |
+| | OZ `ReHypothecationHook` | Fabio's hooks |
 |---|---|---|
-| Idle liquidity | One ERC-4626 vault per token | Treasury across up to 8 whitelisted vaults per token |
-| JIT range | Full range | Slice from the current price, sized from the LPs' book |
-| Fee | None | Dynamic sell fee below par, path-averaged (`BaseOverrideFee`) |
-| Buy above par | Fills from LPs | Mints USDrf (pool 1) or stakes sUSDrf (pool 2) through RealFi |
-| PoolManager short of a token | Real tokens only | ERC-6909 claims, redeemed later |
-| Upgrades | None | UUPS; admin, same contract id, higher `VERSION` |
-| Seeding | Open | Admin-only first seed |
+| Idle liquidity | One ERC-4626 vault per token | Up to 8 whitelisted vaults per token |
+| Liquidity per swap | Full range | From the current price, sized to the LPs' holdings |
+| Fee | None | Rises as the price falls below par |
+| Buys above par | Filled by LPs | Minted (pool 1) or staked (pool 2) through RealFi |
+| PoolManager lacks the token | Not handled | Paid in ERC-6909 claims |
+| Upgrades | Not upgradeable | UUPS, admin only |
+| First seed | Anyone | Admin only |
 
-Sources: [`contracts/hooks/USDrfPoolHook.sol`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/contracts/hooks/USDrfPoolHook.sol#L30-L54) lines 30 to 54; port diff in [`hooks/vendor/oz-uniswap-hooks/PORT.md`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/contracts/hooks/vendor/oz-uniswap-hooks/PORT.md)
-(upstream commit `b5f10574`, file hashes); overrides in [`AUDIT-NOTES.md`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/docs/AUDIT-NOTES.md) section 6; design in sections 3.1 to 3.5.
-
-Accepted risk on pool 2: a swapper who front-runs a RealFi loss booking gains at the LPs' expense
-([`AUDIT-NOTES.md`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/docs/AUDIT-NOTES.md) section 3.5).
+- Port from upstream commit `b5f10574`, every change listed: [`PORT.md`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/contracts/hooks/vendor/oz-uniswap-hooks/PORT.md)
+- Hook entry point: [`USDrfPoolHook.sol` L30-L54](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/contracts/hooks/USDrfPoolHook.sol#L30-L54)
+- Design, overrides and risks: [`AUDIT-NOTES.md`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/docs/AUDIT-NOTES.md) sections 3 and 6
+- Accepted risk: front-running a RealFi loss booking on pool 2 costs LPs (section 3.5)
 
 ## EulerSwap `UniswapHook`
 
-- Rejects foreign pool initialization, v4 liquidity and donations (`src/UniswapHook.sol` lines 125 to 145).
-- Takes the input from the PoolManager mid-swap (line 111), so routers must settle input first; Fynd's router does
-  ([09](09-routing-fynd.md)).
-- Pays from the account's supply vault, then borrows (`src/libraries/FundsLib.sol` lines 41 to 65); health is checked
-  at the end of the EVC call.
+- Accepts only its own pool; refuses v4 liquidity and donations ([L125-L145](https://github.com/euler-xyz/euler-swap/blob/dd936d2baaacb9064cf919b1fb45ecaa002d2751/src/UniswapHook.sol#L125-L145)).
+- Needs the input paid in before the swap ([L111](https://github.com/euler-xyz/euler-swap/blob/dd936d2baaacb9064cf919b1fb45ecaa002d2751/src/UniswapHook.sol#L111)); Fynd's router does ([09](09-routing-fynd.md)).
+- Pays from the account's deposit, then borrows ([`FundsLib.sol` L41-L65](https://github.com/euler-xyz/euler-swap/blob/dd936d2baaacb9064cf919b1fb45ecaa002d2751/src/libraries/FundsLib.sol#L41-L65));
+  Euler checks the loan at the end.
