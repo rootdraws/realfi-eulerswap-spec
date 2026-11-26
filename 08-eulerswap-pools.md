@@ -1,9 +1,8 @@
-# 8. The lender-funded EulerSwap pools
+# 8. EulerSwap pools
 
-Six pools, three in each Euler cluster, running Euler's EulerSwap v2 with our settings. Each buys a RealFi token and
-pays the seller with a loan from that cluster's vault.[^es]
+EulerSwap v2 as deployed by Euler (factory `0xD05213331221fAB8a3C387F2affBb605Bb04DF5F`), one EVC sub-account per pool.
 
-| Pool | Buys | Pays | Collateral goes to | Loan comes from |
+| Pool | In | Out | Supply vault | Borrow vault |
 |---|---|---|---|---|
 | RealFi A | USDrf | USDC | eUSDrf-2 | eUSDC-143 |
 | RealFi B | sUSDrf | USDC | esUSDrf-2 | eUSDC-143 |
@@ -12,46 +11,21 @@ pays the seller with a loan from that cluster's vault.[^es]
 | RWA B | sUSDrf | USDC | esUSDrf-1 | eUSDC-69 |
 | RWA C | sUSDrf | USDrf | esUSDrf-1 | eUSDrf-1 |
 
-Each pool trades from its own Euler sub-account, since an account may owe one vault at a time. The bought token becomes
-that account's collateral, and the sale reverts if the loan breaks its limit.
+Fork parameters (`sources/fork/script/Pools.s.sol`): one-sided, `concentration` 1e18 (flat), price $1 for USDrf and
+RealFi's rate at deploy for sUSDrf, fee 0.30%, 100k cushion of the input token per account. Fee and owner for mainnet are
+open. The sUSDrf price is static; a fee hook or manager must track the rate.
 
-## Settings used on the fork
+## Capacity
 
-| Setting | Value | Why |
+Bounded by the supply vault's cap (2M USDrf or sUSDrf), the borrow vault's cash, and the cushion (fill at 99.7% of value
+against a 93% or 90% borrow LTV).
+
+## Unwind
+
+| Pool | Repaid by | Time |
 |---|---|---|
-| Price | USDrf at $1; sUSDrf at RealFi's rate when the pool was made | Sellers get fair value |
-| Curve | Flat | Every sale gets the same price, whatever its size |
-| Fee | 0.30% | A test value; not decided for mainnet |
-| Cushion | 100k of the bought token, deposited for each pool account | The loan limit is under 100%, so the account needs its own collateral |
-| Fee receiver | None | Fees stay in the pool account |
+| A | USDrf redemption | Each mainnet redemption needs RealFi's Safe approval; no SLA (`OPEN-ITEMS.md` E7) |
+| B | Unstake, then redemption | 7 days, then as A |
+| C | Unstake | 7 days |
 
-The price does not follow sUSDrf's rate on its own. As the rate rises, the pool's owner must update it, or add a hook
-that does, as the shMON exit desk on Monad does with its EulerSwap pool.
-
-## What limits a pool's depth
-
-Three things cap how much one pool can buy:
-
-1. **The collateral vault's deposit cap.** Each USDrf and sUSDrf vault takes at most 2M. On the fork, the USDrf vaults
-   held 1.6M, so pool A could buy only 400k of USDrf.
-2. **The lending vault's cash.** A pool can borrow only what lenders have deposited and nobody else has borrowed.
-3. **The cushion.** Pool A pays 99.7% of value but may borrow only 93% of it, so the pool account's own collateral
-   must cover the gap. A bigger cushion lets a pool buy more before its loan limit stops it.
-
-## What repays the loans
-
-| Pool | Repaid by | How long it takes |
-|---|---|---|
-| A (USDrf in, USDC out) | RealFi redeeming the USDrf for USDC | Each mainnet redemption waits for RealFi's Safe to approve it, and RealFi has promised no deadline |
-| B (sUSDrf in, USDC out) | Unstaking the sUSDrf, then redeeming the USDrf | 7 days, then the redemption wait |
-| C (sUSDrf in, USDrf out) | Unstaking the sUSDrf | 7 days |
-
-Until a loan is repaid, the lender earns the borrow rate on it. The pool account pays that interest out of its 0.30% fee
-and its cushion.
-
-## Access lists
-
-USDrf and sUSDrf refuse a transfer unless the receiver is on RealFi's access list or is exempt. On the fork, RealFi's list
-admin listed all six pools. On mainnet, RealFi must list each pool before it can trade.
-
-[^es]: EulerSwap v2 on Ethereum: factory `0xD05213331221fAB8a3C387F2affBb605Bb04DF5F`, implementation `0x8B0E044E364F2cE913799d53b300e15A6974DC97` (`eulerSwapImpl()`), periphery `0xD3a349EE0A21eA0A7E9513ac236ae614b5FD513E` (euler-interfaces `addresses/1/EulerSwapAddresses.json`). Pool settings: [`sources/fork/script/Pools.s.sol`](sources/fork/script/Pools.s.sol). Redemption approval: `RealFiStructures/docs/OPEN-ITEMS.md` E7.
+RealFi must list each pool on its access list before it can receive USDrf or sUSDrf.
