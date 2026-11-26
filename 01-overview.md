@@ -18,7 +18,7 @@ On chain, sUSDrf's cooldown reads 604,800 seconds (7 days), and 1 sUSDrf is wort
 | Pool hooks (Build 2) | Two Uniswap v4 pools, USDrf/USDC and sUSDrf/USDrf, whose LP money is lent out between swaps | Built and tested; not on mainnet |
 | Liquidator (Build 3) | Liquidates unhealthy loans in our markets in one transaction | Built and tested; not on mainnet |
 | EulerSwap pools | Six pools that buy USDrf or sUSDrf and pay with a loan from our Euler vaults | Proposed; tested on a mainnet fork |
-| Fynd | A route finder that sends each trade through whichever pools pay most | Proposed; runs on Base today |
+| Fynd | A route finder that sends each trade through whichever pools pay most, reached over an HTTP API | Proposed; Propeller Heads hosts it, and anyone can run their own ([09](09-routing-fynd.md#the-fynd-api)) |
 
 ## Why lenders fund the pools
 
