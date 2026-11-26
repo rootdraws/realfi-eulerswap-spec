@@ -4,9 +4,9 @@
 
 | Piece | What it does | Status |
 |---|---|---|
-| Euler lending markets | Lend USDC and USDrf against USDrf and sUSDrf, in two Euler clusters | Live since 2026-11-20, all five vaults switched on |
-| Loop vault (Build 1) | Takes USDC, mints and stakes it, and borrows on Euler to hold about 3x sUSDrf | Built and tested; not on mainnet |
-| Pool hooks (Build 2) | Two Uniswap v4 pools, USDrf/USDC and sUSDrf/USDrf, whose LP money is lent out between swaps | Built and tested; not on mainnet |
+| Euler RealFi Cluster | Borrowable USDC & USDrf against USDrf and sUSDrf collateral | Live on Mainnet. |
+| Loop vault (Build 1) | Takes USDC, mints and stakes to 3x sUSDrf | Built and tested. |
+| Pool hooks (Build 2) | Two Uniswap v4 pools, USDrf/USDC and sUSDrf/USDrf, Rehypothecation of LP into Markets according to  | Built and tested; not on mainnet |
 | Liquidator (Build 3) | Liquidates unhealthy loans in our markets in one transaction | Built and tested; not on mainnet |
 | EulerSwap pools | Six pools that buy USDrf or sUSDrf and pay with a loan from our Euler vaults | Proposed; tested on a mainnet fork |
 | Fynd | Routes each trade through whichever pools pay most | Proposed; hosted by Propeller Heads or self-run ([09](09-routing-fynd.md)) |
