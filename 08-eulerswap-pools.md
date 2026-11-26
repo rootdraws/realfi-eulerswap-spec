@@ -20,7 +20,7 @@ The fork used a flat curve, sUSDrf priced at RealFi's rate, a 0.30% fee and 100k
 ([`Pools.s.sol`](sources/fork/script/Pools.s.sol)). The mainnet fee and owner are not chosen yet. The price does not
 move on its own, so a manager or fee hook must track RealFi's rate.
 
-## Both clusters in one trade
+## Splitting large orders across the RealFi and RWA clusters
 
 A large sUSDrf sale can draw on the USDC in both clusters. Fynd splits the order between the RealFi pool, which borrows
 from eUSDC-143, and the RWA pool, which borrows from eUSDC-69. Uniswap v4 settles both legs in a single transaction.
