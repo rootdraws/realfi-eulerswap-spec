@@ -2,10 +2,10 @@
 
 ## AlphaGrowth Safe [`0x4f894Bfc9481110278C356adE1473eBe2127Fd3C`](https://etherscan.io/address/0x4f894Bfc9481110278C356adE1473eBe2127Fd3C)
 
-- 3 of 9 owners; no timelock, module or guard on Ethereum.
-- Governor of all five vaults and both routers (`0x6eE2056AD473D46efAdCDA12529686D60d0E775B`, `0x3643E21087B7a6D3128AB4Ba35310ba0E7628504`), and fee receiver.
-- Governor powers: `euler-vault-kit/src/EVault/modules/Governance.sol` lines 220 to 385. None moves deposits or
-  collateral; the exposure is oracle and LTV choice.
+- Any 3 of its 9 owners can sign. It has no timelock, module or guard on Ethereum.
+- It governs all five vaults and both routers, and it receives the interest fee.
+- Its governor powers set oracles, LTVs, caps, rates and fees ([`Governance.sol`](https://github.com/euler-xyz/euler-vault-kit/blob/93a1de491531e54cbbcf0e5c8cacfe558f924867/src/EVault/modules/Governance.sol#L220-L398)). None of them can move
+  deposits or collateral.
 
 Owners: `0x04805982AaA97e6632d1B73d0C004A6f0c02E2D9`, `0xF20cC34f6DEF058Bf79fd556d85cb951e31F1b61`,
 `0xbCeAD0fDeE4C73e004FC509862fD5740D26D652d`, `0x513C1DC7c4ae6EC45e88eEE4808042B712CD5dC3`,
@@ -15,21 +15,23 @@ Owners: `0x04805982AaA97e6632d1B73d0C004A6f0c02E2D9`, `0xF20cC34f6DEF058Bf79fd55
 
 ## Builds 1 to 3
 
-| Role | Holder | Can | Cannot |
+| Role | Held by | Can | Cannot |
 |---|---|---|---|
-| Admin | Deployer, then the Safe by `handover` | Upgrade (no timelock), set everything, halt, rescue | Remove a NAV source holding funds; replace a market with debt or collateral |
-| Keeper (`EXECUTOR_ROLE`) | Server key | Loop, de-lever, settle batches, move pool USDrf among whitelisted vaults | Borrow past 70%, withdraw collateral past 85%, receive funds |
-| Guardian | Server key, monitor only | Pause; lift its own pause | Lift an admin pause, halt, upgrade, move funds |
-| Liquidator bot (`EXECUTOR_ROLE`) | Server key | Pick violators, sizes, whitelisted routes | Unlisted markets or routers; unprofitable liquidations |
+| Admin | The deployer, then the Safe after `handover` | Upgrade without a timelock, change any setting, halt, rescue tokens | Remove a NAV source that holds funds, or replace a market that has debt or collateral |
+| Keeper | A server key | Loop, de-lever, settle withdrawals, and move pool USDrf between whitelisted vaults | Borrow past 70%, withdraw collateral past 85%, or receive funds |
+| Guardian | A server key used only by the monitor | Pause, and lift its own pause | Lift the admin's pause, halt, upgrade, or move funds |
+| Liquidator bot | A server key | Choose which loans to liquidate, how much, and which whitelisted route to use | Use unlisted markets or routers, or finish a liquidation without profit |
 
-Sources: [`AUDIT-NOTES.md`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/docs/AUDIT-NOTES.md) sections 2.2, 3.2, 4.2; key rotation in [`docs/RUNBOOK.md`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/docs/RUNBOOK.md) "Rotating a key".
+Roles are defined in [`AUDIT-NOTES.md`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/docs/AUDIT-NOTES.md) sections 2.2, 3.2 and 4.2. Key rotation is in
+[`RUNBOOK.md`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/docs/RUNBOOK.md), "Rotating a key".
 
 ## EulerSwap pool accounts
 
-The account owner sets price, fee, curve and managers (`euler-swap/src/EulerSwapManagement.sol`). Mainnet owner not yet
-chosen.
+Each account's owner sets its pool's price, fee, curve and managers ([`EulerSwapManagement.sol`](https://github.com/euler-xyz/euler-swap/blob/dd936d2baaacb9064cf919b1fb45ecaa002d2751/src/EulerSwapManagement.sol#L139-L165)). The mainnet
+owner is not chosen yet.
 
 ## RealFi
 
-Our contracts depend on RealFi's listings and roles; assumptions T1 to T8 and open item E32 (RealFi admin roles on
-multisigs) in [`AUDIT-NOTES.md`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/docs/AUDIT-NOTES.md) section 2.2.
+Our contracts depend on RealFi's listings and admin roles. The assumptions are listed in
+[`AUDIT-NOTES.md`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/docs/AUDIT-NOTES.md) section 2.2, and open item E32 asks RealFi to hold its admin roles in
+multisigs.
