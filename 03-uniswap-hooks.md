@@ -34,8 +34,8 @@ instead keeps liquidity in outside vaults and adds it to the pool only for the l
 | Part | OpenZeppelin's `ReHypothecationHook` | Fabio's hooks |
 |---|---|---|
 | Where liquidity waits | One ERC-4626 vault per token | A treasury contract that spreads each token across up to eight listed vaults |
-| The position for a swap | A fixed range | A slice of the range that starts at the current price, sized from the LPs' holdings |
-| Fees | Set by the hook's owner | A sell fee that rises as the price falls below $1, averaged over the price path the sale crosses |
+| The position for a swap | The full price range | A slice of the pool's range that starts at the current price, sized from the LPs' holdings |
+| Fees | None of its own | A sell fee that rises as the price falls below $1, averaged over the price path the sale crosses, through OpenZeppelin's `BaseOverrideFee` |
 | A buy above $1 | Fills from the LPs | Mints new USDrf 1:1 through RealFi instead |
 | When Uniswap lacks the token | Moves real tokens only | Takes Uniswap IOUs for the shortfall and turns them into tokens later |
 | Upgrades | None; a plain contract | Behind an upgradeable proxy: an upgrade needs the admin, the same contract name and a higher version |
