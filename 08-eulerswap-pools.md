@@ -45,6 +45,11 @@ On the fork, one transaction sold 800k sUSDrf this way ([10](10-testing.md)):
 - The sUSDrf vault caps deposits at 2M.
 - A pool can borrow only the cash its borrow vault holds.
 - A pool fills at 99.7% of value but borrows at most 90%, so its own sUSDrf covers the gap.
+- To stay within the 90% borrow limit, a pool must hold its own sUSDrf worth about 9.8% of the sUSDrf it buys (USDC
+  pool) or 11% (USDrf pool). At that limit a 2.2% fall in Euler's sUSDrf price reaches the 92% liquidation line, so
+  holding 24% to 25% keeps the loan at 80%. The formula is own sUSDrf = sUSDrf bought × (0.997 × pool price × debt
+  token price / (LTV × Euler's sUSDrf price) − 1), using a pool price of 1.264628 USDrf per sUSDrf and Euler's prices of
+  $1.2755 for sUSDrf and $1.0104 for USDrf.[^health]
 - A pool can sell only the sUSDrf it holds.
 
 A separate USDC EVK vault designated as a primary swap venue keeps other borrowers from using up that cash.
@@ -59,3 +64,5 @@ Buyers of sUSDrf repay the loans directly. Otherwise:
 | USDrf | Unstaking | 7 days, or immediate if RealFi lists the pool's owner contract for instant unstake |
 
 RealFi must list each pool before it can receive USDrf or sUSDrf.
+
+[^health]: Checked on the fork: the RealFi USDC pool's account held 342,325 sUSDrf, which Euler values at $392,966 after the 90% LTV (`accountLiquidity`), against 304,334 USDC of debt. Prices from the RealFi router's `getQuote`.
