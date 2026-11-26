@@ -6,7 +6,7 @@
 |---|---|---|
 | Euler RealFi Cluster | Borrowable USDC & USDrf against USDrf and sUSDrf collateral | Live on Mainnet. |
 | Loop vault (Build 1) | Takes USDC, mints and stakes to 3x sUSDrf | Built and tested. |
-| Pool hooks (Build 2) | Two Uniswap v4 Rehypothecation pools, sUSDrf/USDC and sUSDrf/USDrf.| Built and tested on OpenZeppelin Hooks. |
+| Pool hooks (Build 2) | Two Uniswap v4 Rehypothecation pools, USDrf/USDC and sUSDrf/USDrf.| Built and tested on OpenZeppelin Hooks. |
 | Liquidator (Build 3) | Self-funded through RealFi's instant unstake, in one transaction; sUSDrf collateral against USDrf debt | Built and tested. |
 | EulerSwap pools | Four borrow-to-fill pools, two per cluster: sUSDrf <> USDC and sUSDrf <> USDrf. This allows Univ4 Flash Accounting between Eulerswap pools for larger orders, facilitated through Fynd Routing. | Tested on a mainnet fork. |
 | Fynd | Splits each trade across the pools; hosted by Propeller Heads or self-run ([09](09-routing-fynd.md)) | API usage Proposed for any internal trades / arbitrage. |
