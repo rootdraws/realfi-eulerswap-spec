@@ -3,10 +3,10 @@ pragma solidity ^0.8.24;
 
 import {Script, console2} from "forge-std/Script.sol";
 
-// Fork only. Four lender-funded EulerSwap v2 pools on Ethereum, two per cluster; Fynd chains them for sUSDrf to USDC:
-//   USDrf in, USDC out    (USDrf collateral, USDC loan)
-//   sUSDrf in, USDrf out  (sUSDrf collateral, USDrf loan)
-// Sub-accounts 1, 3, 4 and 6 are kept from the six-pool run, so the four pools keep their addresses.
+// Fork only. Four lender-funded EulerSwap v2 pools on Ethereum, two per cluster, each trading sUSDrf both ways:
+//   sUSDrf <> USDC   (sUSDrf collateral, USDC loan)
+//   sUSDrf <> USDrf  (sUSDrf collateral, USDrf loan)
+// Sub-accounts 7 to 10 of OWNER.
 // Each pool trades from its own EVC sub-account of OWNER (one account may owe one vault at a time). Flat price, 0.30% fee.
 // Run: forge script script/Pools.s.sol --rpc-url http://127.0.0.1:8548 --unlocked --sender <OWNER> --broadcast
 
@@ -47,17 +47,19 @@ contract Pools is Script {
     uint64 constant FEE = 0.003e18;
     uint112 constant USDC_ROOM = 5_000_000e6;   // the most USDC a pool may pay out; the loan limit binds first
     uint112 constant USDRF_ROOM = 2_000_000e6;
+    uint112 constant SUSDRF_STOCK = 100_000e6; // the account's own sUSDrf, the most a buyer can take at first
 
     function run() external {
         address owner = msg.sender;
         uint256 rate = IVault(SUSDRF).convertToAssets(1e6); // USDrf per sUSDrf, 6 decimals each
         uint80 susdrfPx = uint80(rate * 1e12);
         vm.startBroadcast();
-        // token order: sUSDrf 0x8f45 < USDC 0xA0b8 < USDrf 0xD756
-        deploy("RealFi USDrf->USDC", sub(owner, 1), RF_USDC, RF_USDRF, RF_USDC, address(0), USDC_ROOM, 0, 1e18, 1e18);
-        deploy("RealFi sUSDrf->USDrf", sub(owner, 3), RF_SUSDRF, RF_USDRF, address(0), RF_USDRF, 0, USDRF_ROOM, susdrfPx, 1e18);
-        deploy("RWA USDrf->USDC", sub(owner, 4), RWA_USDC, RWA_USDRF, RWA_USDC, address(0), USDC_ROOM, 0, 1e18, 1e18);
-        deploy("RWA sUSDrf->USDrf", sub(owner, 6), RWA_SUSDRF, RWA_USDRF, address(0), RWA_USDRF, 0, USDRF_ROOM, susdrfPx, 1e18);
+        // token order: sUSDrf 0x8f45 < USDC 0xA0b8 < USDrf 0xD756. Two-sided: a sale of sUSDrf borrows the output token;
+        // a purchase of sUSDrf repays that loan and is paid from the account's sUSDrf (never borrowed).
+        deploy("RealFi sUSDrf<>USDC", sub(owner, 7), RF_SUSDRF, RF_USDC, address(0), RF_USDC, SUSDRF_STOCK, USDC_ROOM, susdrfPx, 1e18);
+        deploy("RealFi sUSDrf<>USDrf", sub(owner, 8), RF_SUSDRF, RF_USDRF, address(0), RF_USDRF, SUSDRF_STOCK, USDRF_ROOM, susdrfPx, 1e18);
+        deploy("RWA sUSDrf<>USDC", sub(owner, 9), RWA_SUSDRF, RWA_USDC, address(0), RWA_USDC, SUSDRF_STOCK, USDC_ROOM, susdrfPx, 1e18);
+        deploy("RWA sUSDrf<>USDrf", sub(owner, 10), RWA_SUSDRF, RWA_USDRF, address(0), RWA_USDRF, SUSDRF_STOCK, USDRF_ROOM, susdrfPx, 1e18);
         vm.stopBroadcast();
     }
 
