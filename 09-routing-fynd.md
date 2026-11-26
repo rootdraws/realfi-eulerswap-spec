@@ -5,6 +5,9 @@ block, splits a trade across the pools that pay most, and returns a transaction 
 input into Uniswap before each swap ([`UniswapV4Executor.sol` L314-L322](https://github.com/propeller-heads/tycho-execution/blob/c4ed9eb51dfefe4fc973f33487fa4d51d2407d3a/foundry/src/executors/UniswapV4Executor.sol#L314-L322)), which the EulerSwap hook requires
 ([`UniswapHook.sol` L111](https://github.com/euler-xyz/euler-swap/blob/dd936d2baaacb9064cf919b1fb45ecaa002d2751/src/UniswapHook.sol#L111)).
 
+For our own trades, Fynd can route one order across Fabio's two Rehypothecation pools and the EulerSwap pools in both
+clusters. One trade can then draw on the Rehypothecation liquidity and on both USDC vaults at once.
+
 ## Fynd's API
 
 Propeller Heads hosts the API, and anyone can run their own copy. Both take the same requests.
@@ -45,8 +48,11 @@ curl -X POST https://fynd-api.propellerheads.xyz/v1/ethereum/quote \
 Sources: [`hosted-api.md`](https://github.com/propeller-heads/fynd/blob/c7ec56515823c684f4acf9bf51e7a9fee13f3e85/docs/get-started/hosted-api.md), [`handlers.rs`](https://github.com/propeller-heads/fynd/blob/c7ec56515823c684f4acf9bf51e7a9fee13f3e85/fynd-rpc/src/api/handlers.rs#L43),
 [`lib.rs` L523-L557](https://github.com/propeller-heads/fynd/blob/c7ec56515823c684f4acf9bf51e7a9fee13f3e85/fynd-rpc-types/src/lib.rs#L523-L557).
 
-Our copy of Fynd carries a patch, added 2026-10-21, that lets it read EulerSwap v2 pools. We have not confirmed that the
-hosted API reads them.
+Our copy of Fynd carries a patch, added 2026-10-21, that lets it read EulerSwap v2 pools. Two questions are open for
+our meeting with Propeller Heads on 2026-11-26:
+
+- Does the hosted API read EulerSwap v2 pools?
+- Can Fynd simulate Fabio's Rehypothecation hooks?
 
 ## Fynd's license
 
