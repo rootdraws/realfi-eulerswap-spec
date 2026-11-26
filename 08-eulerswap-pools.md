@@ -45,18 +45,26 @@ from eUSDC-69. Uniswap v4 settles both legs in one transaction. On the fork, one
 
 ## What limits a pool's size
 
-- The sUSDrf vault caps deposits at 2M.
+- The sUSDrf vault takes at most 2M in deposits.
 - A pool can borrow only the cash left in its borrow vault. A separate USDC EVK vault designated as a primary swap venue
-  keeps other borrowers from using that cash.
+  keeps that cash for the pools.
 - A pool can sell only the sUSDrf it holds.
-- A pool pays 99.7% of value but may borrow only 90% of it, so it must hold its own sUSDrf to cover the gap.
 
-To stay within the 90% borrow limit, a pool must hold its own sUSDrf worth about 9.8% of the sUSDrf it buys (USDC pool)
-or 11% (USDrf pool). At that limit a 2.2% fall in Euler's sUSDrf price reaches the 92% liquidation line, so holding 24%
-to 25% keeps the loan at 80%.[^health]
+## Capital each pool must hold
 
-Own sUSDrf = sUSDrf bought × (0.997 × pool price × debt token price / (LTV × Euler's sUSDrf price) − 1), with a pool
-price of 1.264628 USDrf per sUSDrf and Euler's prices of $1.2755 for sUSDrf and $1.0104 for USDrf.
+A pool pays 99.7% of value but may borrow only 90% of it. It holds its own sUSDrf to cover the difference.
+
+| Loan level the pool keeps | USDC pool | USDrf pool |
+|---|---|---|
+| 90%, the borrow limit, 2.2% from liquidation | 9.8% of the sUSDrf it buys | 11.0% |
+| 80% | 23.6% | 24.8% |
+
+```
+own sUSDrf = sUSDrf bought × (0.997 × pool price × debt price / (loan level × Euler's sUSDrf price) − 1)
+```
+
+Inputs: pool price 1.264628 USDrf per sUSDrf; Euler prices $1.2755 for sUSDrf, $1.0104 for USDrf and $1 for
+USDC.[^health]
 
 ## Repaying the loans
 
