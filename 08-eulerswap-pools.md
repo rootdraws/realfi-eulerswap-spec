@@ -1,6 +1,7 @@
 # 8. EulerSwap pools
 
-Each pool runs EulerSwap v2 from Euler's factory
+Each pool runs EulerSwap v2 ([euler-xyz/euler-swap](https://github.com/euler-xyz/euler-swap/tree/dd936d2baaacb9064cf919b1fb45ecaa002d2751)
+at `dd936d2`) from Euler's factory
 [`0xD05213331221fAB8a3C387F2affBb605Bb04DF5F`](https://etherscan.io/address/0xD05213331221fAB8a3C387F2affBb605Bb04DF5F)
 on its own EVC sub-account.
 
