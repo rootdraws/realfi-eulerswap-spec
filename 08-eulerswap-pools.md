@@ -25,6 +25,13 @@ move on its own, so a manager or fee hook must track RealFi's rate.
 Fynd can fill one order through the RealFi and RWA pools together, drawing USDC from eUSDC-143 and eUSDC-69 at once. On
 the fork, 800k sUSDrf split across both paid 1,008,667 USDC in one transaction ([10](10-testing.md)).
 
+## Economics
+
+- **Carry:** the sUSDrf a pool holds earns RealFi's yield, while the pool pays the USDC lender's borrow rate. The pool
+  earns the difference.
+- **The USDC lender:** Wave, as the USDC lender, earns the borrow rate on what the pools draw. Running a pool account as
+  well adds the pool's trading fees and the carry.
+
 ## Capacity
 
 - The sUSDrf vault caps deposits at 2M.
