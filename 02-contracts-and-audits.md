@@ -48,7 +48,8 @@ Upgradeable (UUPS, no timelock); solc 0.8.35; OpenZeppelin 5.4.0. Full design, r
 
 Open internal findings:
 
-- **B2-H-01** (accepted): a pool 1 round trip pays up to ~$750 when a USDrf venue is nearly fully borrowed.
+- **B2-H-01** (accepted): rehypothecation's capacity limit. When pool 1's USDrf is nearly all lent out, a round trip
+  pays up to ~$750, taken from LPs.
 - **B1-M-05** (partly fixed): a RealFi pause of instant unstake blocks the de-lever but not an external liquidation; keeper and monitor page on it.
 
 [^v]: Addresses: `ag-euler/contracts/realfi-ethereum/deployed-1.env`. Read at block 26,496,053: `LTVFull`, `caps`, `computeInterestRateView`, `maxLiquidationDiscount`, `interestFee`, `governorAdmin`.
