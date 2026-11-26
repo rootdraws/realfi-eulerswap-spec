@@ -1,6 +1,6 @@
 # 5. Alerts and emergency controls
 
-Fabio's monitor checks about 150 alert conditions every 12 seconds. Alerts go to Telegram, to any webhook a partner
+The monitor checks about 150 alert conditions every 12 seconds. Alerts go to Telegram, to any webhook a partner
 names, and to a dead-man health check. The full list is in [`RISK-ALERTS.md`](sources/realfi-structures/RISK-ALERTS.md).
 
 | Code | Path |

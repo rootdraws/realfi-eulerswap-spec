@@ -8,7 +8,7 @@
 
 ## Building on OZ Hooks:
 
-| | OZ `ReHypothecationHook` | Fabio's hooks |
+| | OZ `ReHypothecationHook` | Our hooks |
 |---|---|---|
 | Idle liquidity | One ERC-4626 vault per token | Up to 8 whitelisted vaults per token |
 | Liquidity per swap | Full range | From the current price, sized to the LPs' holdings |

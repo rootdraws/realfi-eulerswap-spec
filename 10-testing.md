@@ -25,8 +25,8 @@ across both clusters filled.
 The fork differs from the live setup in three ways:
 
 - The profit receiver is set to the Safe.
-- The deploy check accepts eUSDrf-2's 15% maximum discount, where Fabio's check expects 5%.
+- The deploy check accepts eUSDrf-2's 15% maximum discount, where the deploy check expects 5%.
 - Token balances were written straight into storage.
 
-Fabio's own unit, fork, fuzz, invariant and Sepolia conformance suites are listed in `RealFiStructures/README.md`. The map
+The unit, fork, fuzz, invariant and Sepolia conformance suites are listed in `RealFiStructures/README.md`. The map
 from each property to its test is in [`AUDIT-NOTES.md`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/docs/AUDIT-NOTES.md).

@@ -16,9 +16,9 @@ Each route lends the liquidator the repayment token and reverts unless it is pai
 |---|---|---|---|
 | Build 3 | RealFi lists it for instant unstake. Inside one EVC call it liquidates, unstakes the seized sUSDrf, repays and sends the profit on. | Built | [`RealFiLiquidator.sol` L115-L188](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/contracts/liquidator/RealFiLiquidator.sol#L115-L188) |
 | EulerSwap flash swap | The pool pays out USDrf or USDC first. The liquidator liquidates and pays the pool back with the seized sUSDrf in the callback. | Available; not tested for liquidation | [`EulerSwap.sol` L122-L153](https://github.com/euler-xyz/euler-swap/blob/dd936d2baaacb9064cf919b1fb45ecaa002d2751/src/EulerSwap.sol#L122-L153) |
-| Fabio's hooks, Uniswap v4 flash accounting | The liquidator takes USDrf from the pool, liquidates, and settles the sUSDrf before its Uniswap call ends. | By the code; not tested | [`AUDIT-NOTES.md`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/docs/AUDIT-NOTES.md) section 6 |
-| Outside capital | A shared contract lends to the liquidator and reverts unless more than the loan comes back. | Not built | Fabio, call of 2026-11-25 |
+| Rehypothecation pools, Uniswap v4 flash accounting | The liquidator takes USDrf from the pool, liquidates, and settles the sUSDrf before its Uniswap call ends. | By the code; not tested | [`AUDIT-NOTES.md`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/docs/AUDIT-NOTES.md) section 6 |
+| Outside capital | A shared contract lends to the liquidator and reverts unless more than the loan comes back. | Not built | Call of 2026-11-25 |
 
 - An EulerSwap `beforeSwap` hook can limit which callers may flash swap ([`SwapLib.sol` L90-L95](https://github.com/euler-xyz/euler-swap/blob/dd936d2baaacb9064cf919b1fb45ecaa002d2751/src/libraries/SwapLib.sol#L90-L95)).
-- Fabio described outside capital on the call of 2026-11-25: "we only do a drawdown in the event that in the exact same block you guys get more money
+- On outside capital, from the call of 2026-11-25: "we only do a drawdown in the event that in the exact same block you guys get more money
   returned."

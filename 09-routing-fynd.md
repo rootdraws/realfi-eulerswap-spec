@@ -1,7 +1,7 @@
 # 9. Routing with Fynd
 
 [Fynd](https://github.com/propeller-heads/fynd), by Propeller Heads, is a routing solution that combines the EulerSwap
-pools in both clusters and Fabio's Uniswap v4 Rehypothecation pools into a single transaction. A large order can draw on
+pools in both clusters and the Uniswap v4 Rehypothecation pools into a single transaction. A large order can draw on
 the Rehypothecation liquidity and on both USDC vaults at once.
 
 Fynd reads every pool's state each block and finds the split that pays most. It settles through Tycho's router, which
@@ -51,7 +51,7 @@ Our copy of Fynd carries a patch, added 2026-10-21, that lets it read EulerSwap 
 our meeting with Propeller Heads on 2026-11-26:
 
 - Does the hosted API read EulerSwap v2 pools?
-- Can Fynd simulate Fabio's Rehypothecation hooks?
+- Can Fynd simulate the Rehypothecation hooks?
 
 ## Fynd's license
 

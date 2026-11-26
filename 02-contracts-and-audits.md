@@ -26,7 +26,7 @@ multisig, governs them ([04](04-keys.md)).[^v]
 
 ## Built, not deployed:
 
-The contracts are upgradeable UUPS proxies with no timelock, built with solc 0.8.35 and OpenZeppelin 5.4.0. Fabio's
+The contracts are upgradeable UUPS proxies with no timelock, built with solc 0.8.35 and OpenZeppelin 5.4.0. The
 audit notes cover the design, roles, limits and findings: [`RealFiStructures/docs/AUDIT-NOTES.md`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/docs/AUDIT-NOTES.md).
 
 | Build | Contracts |
