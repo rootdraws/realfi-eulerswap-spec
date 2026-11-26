@@ -55,7 +55,6 @@ contract, deployed by Euler's factory, with only our settings.
 | EulerSwap v2 (the six pools) | Cyfrin (2025-05-26), ChainSecurity, Cantina, and others: six reports in Euler's repo |
 | Uniswap v4 core | OpenZeppelin and Trail of Bits, plus others |
 | Tycho router and executors (Fynd's router) | Three audits in Propeller Heads' repo (2025-03-04, 2025-08-05, 2026-05-15) |
-| ushMON, our closest earlier contract | An outside audit on 2026-11-15 found no high issue; eleven later issues were all settled |
 
 The two internal findings not fully closed:
 

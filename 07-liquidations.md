@@ -42,10 +42,12 @@ Three designs exist. None is built.
 | Design | How it works | Risk to the capital holder |
 |---|---|---|
 | Allowance | The holder approves our liquidator to draw from its wallet, and the liquidator returns the money plus profit | The approval stays open between liquidations, so a bug or stolen key could draw without returning |
-| Same-transaction contract | A shared contract lends to the liquidator only inside one transaction, and reverts the whole transaction unless the money is back by its end | Nothing leaves for longer than one transaction |
+| Flash-loan draw | A shared contract lends to the liquidator only inside one transaction, and reverts the whole transaction unless more money than it lent is back by its end | Nothing leaves for longer than one transaction, and every draw returns a profit |
 | Lend to the pools' vaults | The holder deposits USDC or USDrf into the Euler vaults the EulerSwap pools borrow from; any liquidator sells seized collateral into the pools | The holder is an ordinary Euler lender: it earns the borrow rate and carries Euler's lender risk |
 
-On the call of 2026-11-25, Fabio called the same-transaction contract the most secure of the first two. The third design
+On the call of 2026-11-25, Fabio described the flash-loan draw: "we only do a drawdown in the event that in the exact
+same block you guys get more money returned." He called it the most secure of the first two, because the contract
+enforces the return on chain. The third design
 is the one this spec adds: the capital earns between liquidations instead of waiting idle, and every liquidator, not only
 ours, can use it.
 
