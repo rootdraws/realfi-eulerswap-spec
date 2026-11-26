@@ -1,22 +1,25 @@
 # 5. Alerts and emergency controls
 
-Fabio's alert system is described in full in
-[`sources/realfi-structures/RISK-ALERTS.md`](sources/realfi-structures/RISK-ALERTS.md): about 150 alert codes, checked
-every 12 seconds, sent to Telegram, to any webhook a partner names, and to a dead-man health check.[^alerts]
+Fabio's monitor checks about 150 alert conditions every 12 seconds. Alerts go to Telegram, to any webhook a partner
+names, and to a dead-man health check. The full list is in [`RISK-ALERTS.md`](sources/realfi-structures/RISK-ALERTS.md).
 
-## What acts without a person
+| Code | Path |
+|---|---|
+| Alert levels and delivery | [`alerts.ts`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/packages/shared/src/alerts.ts), [`telemetry.ts`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/packages/shared/src/telemetry.ts) |
+| Thresholds | [`runtime.json`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/deploy/configs/mainnet/runtime.json) |
 
-1. **The keeper de-levers.** Past 78%, it unwinds the loop vault to 70%, a quarter of the debt per transaction.
-2. **The guardian pauses.** At 85%, or when the monitor cannot see the chain, it pauses the vault.
-3. **The admin decides the rest.** Only the admin unpauses a pool, halts a contract or upgrades.
+## Automatic actions
 
-A pause blocks new risk and keeps every exit that lowers it open.
+1. The keeper de-levers the loop vault from 78% back to 70%, a quarter of the debt per transaction
+   ([`services/keeper/src/loop`](https://github.com/alphagrowth/RealFiStructures/tree/fb29ef6d1aab554e78905a6410e03ef03ad00456/services/keeper/src/loop)).
+2. The guardian pauses the vault at 85%, or when the monitor cannot read the chain
+   ([`guardian.ts`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/services/positionMonitor/src/build1/guardian.ts)).
+3. Only the admin can unpause a pool, halt a contract or upgrade.
+
+A pause blocks new risk but leaves every exit that reduces risk open.
 
 ## Not covered yet
 
-- **The EulerSwap pools.** The checks to add are each pool's loan health, the room left in the vault it borrows from, and
-  how long RealFi takes to repay its loans.
-- **Outside monitoring.** None of our three repos (RealFiStructures, ag-euler, alphastructures) sets up Hypernative or
-  another outside monitor.
-
-[^alerts]: [`RealFiStructures/docs/RISK-ALERTS.md`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/docs/RISK-ALERTS.md) at `fb29ef6`; tick length in [`deploy/configs/mainnet/runtime.json`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/deploy/configs/mainnet/runtime.json) (`tickMs` 12000).
+- No service watches the EulerSwap pools yet. The checks to add are each pool's loan health, the cash left in its borrow
+  vault, and how long RealFi takes to repay.
+- None of our repos (RealFiStructures, ag-euler, alphastructures) sets up Hypernative or another outside monitor.
