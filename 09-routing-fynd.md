@@ -1,12 +1,11 @@
 # 9. Routing with Fynd
 
-[Fynd](https://github.com/propeller-heads/fynd) is a route finder by Propeller Heads. It reads each pool's state every
-block, splits a trade across the pools that pay most, and returns a transaction for Tycho's router. That router pays the
-input into Uniswap before each swap ([`UniswapV4Executor.sol` L314-L322](https://github.com/propeller-heads/tycho-execution/blob/c4ed9eb51dfefe4fc973f33487fa4d51d2407d3a/foundry/src/executors/UniswapV4Executor.sol#L314-L322)), which the EulerSwap hook requires
-([`UniswapHook.sol` L111](https://github.com/euler-xyz/euler-swap/blob/dd936d2baaacb9064cf919b1fb45ecaa002d2751/src/UniswapHook.sol#L111)).
+[Fynd](https://github.com/propeller-heads/fynd), by Propeller Heads, is a routing solution that combines the EulerSwap
+pools in both clusters and Fabio's Uniswap v4 Rehypothecation pools into a single transaction. A large order can draw on
+the Rehypothecation liquidity and on both USDC vaults at once.
 
-For our own trades, Fynd can route one order across Fabio's two Rehypothecation pools and the EulerSwap pools in both
-clusters. One trade can then draw on the Rehypothecation liquidity and on both USDC vaults at once.
+Fynd reads every pool's state each block and finds the split that pays most. It settles through Tycho's router, which
+pays the input into Uniswap before each swap, as the EulerSwap hook requires ([Tycho](https://github.com/propeller-heads/tycho-execution/blob/c4ed9eb51dfefe4fc973f33487fa4d51d2407d3a/foundry/src/executors/UniswapV4Executor.sol#L314-L322), [EulerSwap](https://github.com/euler-xyz/euler-swap/blob/dd936d2baaacb9064cf919b1fb45ecaa002d2751/src/UniswapHook.sol#L111)).
 
 ## Fynd's API
 
