@@ -1,13 +1,6 @@
 # 1. Overview
 
-## What RealFi is
-
-RealFi issues two tokens on Ethereum:
-
-- **USDrf**, a dollar token minted 1:1 for USDC and redeemed 1:1 for USDC.
-- **sUSDrf**, staked USDrf. It earns RealFi's yield, is worth 1.264 USDrf today, and takes 7 days to unstake.[^realfi]
-
-## What AlphaGrowth built around it
+## What AlphaGrowth built
 
 | Piece | What it does | Status |
 |---|---|---|
@@ -33,4 +26,3 @@ RealFi's own exits then repay the loan:
 
 Traders, the loop vault and liquidators all reach the pools through Fynd.
 
-[^realfi]: sUSDrf `0x8f4507d315acf966Fe21F9f4feE4F7e1A6d4c400`: `cooldown()` = 604800 and `convertToAssets(1e6)` = 1,264,048, block 26,496,053.
