@@ -8,7 +8,7 @@ names, and to a dead-man health check. The full list is in [`RISK-ALERTS.md`](so
 | Alert levels and delivery | [`alerts.ts`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/packages/shared/src/alerts.ts), [`telemetry.ts`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/packages/shared/src/telemetry.ts) |
 | Thresholds | [`runtime.json`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/deploy/configs/mainnet/runtime.json) |
 
-## Automatic actions
+## Actions the services take on their own
 
 1. The keeper de-levers the loop vault from 78% back to 70%, a quarter of the debt per transaction
    ([`services/keeper/src/loop`](https://github.com/alphagrowth/RealFiStructures/tree/fb29ef6d1aab554e78905a6410e03ef03ad00456/services/keeper/src/loop)).

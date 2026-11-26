@@ -13,7 +13,7 @@ Owners: `0x04805982AaA97e6632d1B73d0C004A6f0c02E2D9`, `0xF20cC34f6DEF058Bf79fd55
 `0xCfD4eAE5AD164dD02B41715Aa38E54ee68Af2955`, `0x2210dc066aacB03C9676C4F1b36084Af14cCd02E`,
 `0x6e57181D6b4b7c138a6F956AD16DAF4f27FC5E04`.
 
-## Builds 1 to 3
+## Roles in Builds 1 to 3
 
 | Role | Held by | Can | Cannot |
 |---|---|---|---|
@@ -30,7 +30,7 @@ Roles are defined in [`AUDIT-NOTES.md`](https://github.com/alphagrowth/RealFiStr
 Each account's owner sets its pool's price, fee, curve and managers ([`EulerSwapManagement.sol`](https://github.com/euler-xyz/euler-swap/blob/dd936d2baaacb9064cf919b1fb45ecaa002d2751/src/EulerSwapManagement.sol#L139-L165)). The mainnet
 owner is not chosen yet.
 
-## RealFi
+## What we need from RealFi
 
 Our contracts depend on RealFi's listings and admin roles. The assumptions are listed in
 [`AUDIT-NOTES.md`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/docs/AUDIT-NOTES.md) section 2.2, and open item E32 asks RealFi to hold its admin roles in

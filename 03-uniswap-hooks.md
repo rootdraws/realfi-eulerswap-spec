@@ -18,14 +18,13 @@
 | Upgrades | Not upgradeable | UUPS, admin only |
 | First seed | Anyone | Admin only |
 
-- Port from upstream commit `b5f10574`, every change listed: [`PORT.md`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/contracts/hooks/vendor/oz-uniswap-hooks/PORT.md)
-- Hook entry point: [`USDrfPoolHook.sol` L30-L54](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/contracts/hooks/USDrfPoolHook.sol#L30-L54)
-- Design, overrides and risks: [`AUDIT-NOTES.md`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/docs/AUDIT-NOTES.md) sections 3 and 6
-- Accepted risk: front-running a RealFi loss booking on pool 2 costs LPs (section 3.5)
+- [`PORT.md`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/contracts/hooks/vendor/oz-uniswap-hooks/PORT.md) lists every change from upstream commit `b5f10574`.
+- The hook's entry point is [`USDrfPoolHook.sol` L30-L54](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/contracts/hooks/USDrfPoolHook.sol#L30-L54).
+- [`AUDIT-NOTES.md`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/docs/AUDIT-NOTES.md) sections 3 and 6 cover the design, overrides and risks.
+- One accepted risk: a trader who front-runs a RealFi loss booking on pool 2 profits at the LPs' expense (section 3.5).
 
 ## EulerSwap `UniswapHook`
 
-- Accepts only its own pool; refuses v4 liquidity and donations ([L125-L145](https://github.com/euler-xyz/euler-swap/blob/dd936d2baaacb9064cf919b1fb45ecaa002d2751/src/UniswapHook.sol#L125-L145)).
-- Needs the input paid in before the swap ([L111](https://github.com/euler-xyz/euler-swap/blob/dd936d2baaacb9064cf919b1fb45ecaa002d2751/src/UniswapHook.sol#L111)); Fynd's router does ([09](09-routing-fynd.md)).
-- Pays from the account's deposit, then borrows ([`FundsLib.sol` L41-L65](https://github.com/euler-xyz/euler-swap/blob/dd936d2baaacb9064cf919b1fb45ecaa002d2751/src/libraries/FundsLib.sol#L41-L65));
-  Euler checks the loan at the end.
+- The hook accepts only its own pool and refuses v4 liquidity and donations ([L125-L145](https://github.com/euler-xyz/euler-swap/blob/dd936d2baaacb9064cf919b1fb45ecaa002d2751/src/UniswapHook.sol#L125-L145)).
+- It needs the input paid in before the swap ([L111](https://github.com/euler-xyz/euler-swap/blob/dd936d2baaacb9064cf919b1fb45ecaa002d2751/src/UniswapHook.sol#L111)); Fynd's router does ([09](09-routing-fynd.md)).
+- It pays from the account's deposit first, then borrows ([`FundsLib.sol` L41-L65](https://github.com/euler-xyz/euler-swap/blob/dd936d2baaacb9064cf919b1fb45ecaa002d2751/src/libraries/FundsLib.sol#L41-L65). Euler checks the loan at the end.

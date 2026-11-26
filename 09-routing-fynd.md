@@ -1,10 +1,10 @@
-# 9. Fynd
+# 9. Routing with Fynd
 
 Trades reach the pools through Fynd, a route finder by Propeller Heads. It reads every pool's state each block, splits a
 trade across the pools that pay most, and returns a transaction for Tycho's router. That router pays the input into
 Uniswap before each swap, which EulerSwap pools need.[^order]
 
-## The API
+## Fynd's API
 
 | | Hosted by Propeller Heads | Self-hosted |
 |---|---|---|
@@ -18,14 +18,14 @@ Uniswap before each swap, which EulerSwap pools need.[^order]
 | `GET /v1/health` | Says whether the solver is ready and how fresh its data is |
 | `GET /v1/info` | Describes the running solver |
 
-Selling 100k USDrf for USDC:[^api]
+A quote to sell 100k sUSDrf for USDC, with the transaction included:[^api]
 
 ```bash
 curl -X POST https://fynd-api.propellerheads.xyz/v1/ethereum/quote \
   -H "Authorization: $FYND_API_KEY" -H "Content-Type: application/json" \
   -d '{
     "orders": [{
-      "token_in": "0xD75647217206052F6090678905026AA374431563",
+      "token_in": "0x8f4507d315acf966Fe21F9f4feE4F7e1A6d4c400",
       "token_out": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
       "amount": "100000000000",
       "side": "sell",
@@ -35,19 +35,19 @@ curl -X POST https://fynd-api.propellerheads.xyz/v1/ethereum/quote \
   }'
 ```
 
-- **`simulate`** runs the transaction against the latest block before Fynd returns it.
-- **`pool_manager_unlocked`** lets a contract already inside a Uniswap v4 call, such as a liquidator, run the route
+- The `simulate` option runs the transaction against the latest block before Fynd returns it.
+- The `pool_manager_unlocked` option lets a contract already inside a Uniswap v4 call, such as a liquidator, run the route
   inside its own call.
 
 Our copy of Fynd carries a patch, added 2026-10-21, so that it reads EulerSwap v2 pools. Whether the hosted API reads
 them is not confirmed.
 
-## License
+## Fynd's license
 
 A firm trading its own capital through Fynd owes Propeller Heads nothing. A firm that charges others for routing through
 Fynd owes Propeller Heads 20% of that revenue.[^lic]
 
-## Left to build
+## What is left to build
 
 - Run Fynd on Ethereum and confirm it routes across all four pools.
 - Choose who owns the pool accounts, and the fee.

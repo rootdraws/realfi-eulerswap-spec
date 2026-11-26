@@ -11,11 +11,11 @@
 | EulerSwap pools | Four borrow-to-fill pools: sUSDrf <> USDC and sUSDrf <> USDrf in each cluster. | Tested on a mainnet fork. |
 | Fynd | Splits each trade across the pools; hosted by Propeller Heads or self-run ([09](09-routing-fynd.md)) | API usage Proposed for any internal trades / arbitrage. |
 
-## Why borrow-to-fill
+## Why the pools borrow to fill trades
 
-- **Debt swaps:** the pools fill sUSDrf <> USDC and sUSDrf <> USDrf by borrowing, alongside the Rehypothecation pools and
-  the instant redemption vault.
-- **Depth:** idle USDC in the RealFi cluster or the AlphaGrowth RWA cluster backs every sale of sUSDrf into USDC.
-- **Large orders:** Fynd splits an order across the pools in one Uniswap v4 transaction.
-- **Yield and unwind:** the pools' sUSDrf keeps earning while held. The loans clear when USDC buyers take that sUSDrf,
-  which a looping flow supplies.
+- The pools fill sUSDrf <> USDC and sUSDrf <> USDrf trades by borrowing, alongside the Rehypothecation pools and the
+  instant redemption vault.
+- Idle USDC in the RealFi cluster or the AlphaGrowth RWA cluster backs every sale of sUSDrf into USDC.
+- Fynd splits a large order across the pools in one Uniswap v4 transaction.
+- The pools' sUSDrf keeps earning while they hold it. The loans clear when USDC buyers take that sUSDrf, and a looping
+  flow supplies those buyers.

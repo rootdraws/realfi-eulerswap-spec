@@ -2,7 +2,8 @@
 
 ## Live: Euler vaults
 
-Euler Vault Kit proxies from Euler's factory, deployed 2026-11-20, governed by the AlphaGrowth Safe, a 3 of 9 multisig ([04](04-keys.md)).[^v]
+The vaults are Euler Vault Kit proxies from Euler's factory, deployed on 2026-11-20. The AlphaGrowth Safe, a 3 of 9
+multisig, governs them ([04](04-keys.md)).[^v]
 
 | Vault | Address | Cluster | Lends against |
 |---|---|---|---|
@@ -25,8 +26,8 @@ Euler Vault Kit proxies from Euler's factory, deployed 2026-11-20, governed by t
 
 ## Built, not deployed:
 
-Upgradeable (UUPS, no timelock); solc 0.8.35; OpenZeppelin 5.4.0. Full design, roles, limitations and findings:
-[`RealFiStructures/docs/AUDIT-NOTES.md`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/docs/AUDIT-NOTES.md).
+The contracts are upgradeable UUPS proxies with no timelock, built with solc 0.8.35 and OpenZeppelin 5.4.0. Fabio's
+audit notes cover the design, roles, limits and findings: [`RealFiStructures/docs/AUDIT-NOTES.md`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/docs/AUDIT-NOTES.md).
 
 | Build | Contracts |
 |---|---|

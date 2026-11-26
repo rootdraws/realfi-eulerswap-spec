@@ -1,6 +1,7 @@
 # RealFi on Ethereum: lender-funded pools, routing and risk
 
-AlphaGrowth's RealFi build on Ethereum. Chain reads are at block 26,496,053 (2026-11-25); code citations are file and line.
+This spec covers AlphaGrowth's RealFi build on Ethereum. Chain values were read at block 26,496,053 (2026-11-25), and code
+citations link to the file and line.
 
 | Page | Covers |
 |---|---|
