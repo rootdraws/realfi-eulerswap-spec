@@ -47,11 +47,14 @@ curl -X POST https://fynd-api.propellerheads.xyz/v1/ethereum/quote \
 Sources: [`hosted-api.md`](https://github.com/propeller-heads/fynd/blob/c7ec56515823c684f4acf9bf51e7a9fee13f3e85/docs/get-started/hosted-api.md), [`handlers.rs`](https://github.com/propeller-heads/fynd/blob/c7ec56515823c684f4acf9bf51e7a9fee13f3e85/fynd-rpc/src/api/handlers.rs#L43),
 [`lib.rs` L523-L557](https://github.com/propeller-heads/fynd/blob/c7ec56515823c684f4acf9bf51e7a9fee13f3e85/fynd-rpc-types/src/lib.rs#L523-L557).
 
-Our copy of Fynd carries a patch, added 2026-10-21, that lets it read EulerSwap v2 pools. Two questions are open for
-our meeting with Propeller Heads on 2026-11-26:
+Hosted Fynd does not route EulerSwap v2 pools on Ethereum yet. Tycho indexes EulerSwap pools only from the v1 factory
+`0xb013be1D0D380C13B58e889f412895970A2Cf228` ([Ethereum config](https://github.com/propeller-heads/tycho/blob/main/protocols/substreams/ethereum-uniswap-v4/with-hooks/ethereum-uniswap-v4-with-hooks.yaml),
+line 198), and its simulator accepts only the `euler_v1` tag ([`filters.rs`](https://github.com/propeller-heads/tycho/blob/main/crates/tycho-simulation/src/evm/protocol/filters.rs),
+line 47). Our pools come from the v2 factory `0xD05213331221fAB8a3C387F2affBb605Bb04DF5F`.
 
-- Does the hosted API read EulerSwap v2 pools?
-- Can Fynd simulate the Rehypothecation hooks?
+Propeller Heads can add the v2 factory and the `euler_v2` tag, which our own copy of Fynd already carries. Until then, a
+self-hosted Tycho and Fynd with that change routes the pools. One question remains for Propeller Heads: can Fynd simulate
+the Rehypothecation hooks?
 
 ## Fynd's license
 
