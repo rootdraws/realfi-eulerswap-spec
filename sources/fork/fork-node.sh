@@ -1,6 +1,6 @@
 #!/bin/zsh
 # A Hardhat node on chain id 1 that forks Ethereum from the local archive node at its latest block, on port 8547 so it
-# never collides with the archive node's 8545. Fabio's deploy engine (RealFiStructures, env mainnet-fork) needs Hardhat.
+# never collides with the archive node's 8545. The RealFiStructures deploy engine (RealFiStructures, env mainnet-fork) needs Hardhat.
 # Start it with: ~/launchd-run.sh realfi-fork ~/ag-euler/contracts/realfi-eulerswap fork-node.sh
 source $HOME/.nvm/nvm.sh
 cd $HOME/ag-structures/RealFiStructures && nvm use >/dev/null
