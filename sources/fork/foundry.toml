@@ -1,8 +1,8 @@
 [profile.default]
 src = "script"
 out = "out"
-libs = ["../eulerswap-mm-monad/lib"]
-remappings = ["forge-std/=../eulerswap-mm-monad/lib/forge-std/src/"]
+libs = ["lib"]
+remappings = ["forge-std/=lib/forge-std/src/"]
 solc = "0.8.27"
 optimizer = true
 via_ir = true

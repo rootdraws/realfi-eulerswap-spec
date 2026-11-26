@@ -3,13 +3,14 @@
 # pools at once. Uniswap v4 settles both legs once at the end of the call.
 #   zsh split-swap.sh sell <sUSDrf into RealFi> <sUSDrf into RWA>    sells sUSDrf; each pool borrows USDC to pay
 #   zsh split-swap.sh buy  <USDC into RealFi> <USDC into RWA>        buys sUSDrf; the USDC repays each pool's loan
+#   optional 4th and 5th arguments: the RealFi and RWA sUSDrf<>USDC pool addresses
 set -u
 F=http://127.0.0.1:8548
 [ "$(cast rpc hardhat_metadata -r $F 2>/dev/null | grep -c forkedNetwork)" = 1 ] || { print -u2 "refusing: not the Hardhat fork"; exit 1; }
 T=0x000000000000000000000000000000000000C0DE   # the trader, listed with RealFi on the fork
 USDC=0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48; SUSDRF=0x8f4507d315acf966Fe21F9f4feE4F7e1A6d4c400
 UR=0x66a9893cC07D91D95644AEDD05D03f95e1dBA8Af; PERMIT2=0x000000000022D473030F116dDEE9F6B43aC78BA3
-RF_POOL=0xBdAa1a39cF93f9dC0Ed324748494c21f6986E8A8; RWA_POOL=0xaE77E5B69Ef6BffaD81f9c1AE92E560Eb0D928a8
+RF_POOL=${4:-0xBdAa1a39cF93f9dC0Ed324748494c21f6986E8A8}; RWA_POOL=${5:-0xaE77E5B69Ef6BffaD81f9c1AE92E560Eb0D928a8}
 RF_ACCT=0x000000000000000000000000000000000000Aa07; RWA_ACCT=0x000000000000000000000000000000000000aA09
 MODE=$1; A1=$(( $2 * 1000000 )); A2=$(( $3 * 1000000 )); TOTAL=$(( A1 + A2 ))
 if [ $MODE = sell ]; then IN=$SUSDRF; OUT=$USDC; Z=true; else IN=$USDC; OUT=$SUSDRF; Z=false; fi

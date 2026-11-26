@@ -1,12 +1,12 @@
 # 10. Mainnet fork test
 
-We forked Ethereum at block 26,495,709 (2026-11-25), deployed everything, and traded through the pools. The scripts are
-in [`sources/fork/`](sources/fork/) and refuse to run anywhere but the fork.
+We forked Ethereum mainnet, deployed everything, and traded through the pools. Anyone with an archive RPC can rerun it
+with one script; [`sources/fork/README.md`](sources/fork/README.md) has the steps.
 
 ## Setup
 
 1. Deployed Builds 1 to 3 with the RealFiStructures deploy engine.
-2. Added RealFi's listings and ran the pending RWA Safe batch.
+2. Added RealFi's listings.
 3. Deposited 7.5M USDC and 3M USDrf as lenders, and gave each pool 100k sUSDrf.
 4. Deployed the four EulerSwap pools.
 
