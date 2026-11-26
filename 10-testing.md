@@ -21,9 +21,12 @@ in [`sources/fork/`](sources/fork/) and refuse to run anywhere but the fork.
 
 ## Differences from mainnet
 
-- Token balances were written directly into storage.
-- The profit receiver is the Safe.
-- The deploy check was set to accept eUSDrf-2's live 15% maximum liquidation discount; its default is 5%.
+- The test gave lenders, pools and traders their USDC, USDrf and sUSDrf by writing balances directly into the fork, not
+  by buying or minting them.
+- The liquidator sends its profit to an address that is not chosen for mainnet yet. The fork used the AlphaGrowth Safe,
+  `0x4f894Bfc9481110278C356adE1473eBe2127Fd3C`, in its place.
+- The deploy script expects eUSDrf-2's liquidation bonus to be capped at 5%, but the live vault caps it at 15%. The fork
+  raised the script's limit to 15% to match the live vault.
 
 The RealFiStructures unit, fork, fuzz, invariant and Sepolia suites are listed in its README, and
 [`AUDIT-NOTES.md`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/docs/AUDIT-NOTES.md) maps each property to its test.
