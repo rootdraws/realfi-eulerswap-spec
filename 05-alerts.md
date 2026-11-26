@@ -1,7 +1,8 @@
 # 5. Alerts and emergency controls
 
 Fabio's services watch every RealFi Structures contract and each outside dependency on every tick, about every 12
-seconds. His full write-up is `RealFiStructures/docs/RISK-ALERTS.md`; this page summarizes it.[^alerts]
+seconds. His full write-up is [`sources/realfi-structures/RISK-ALERTS.md`](sources/realfi-structures/RISK-ALERTS.md), copied from
+`RealFiStructures/docs/RISK-ALERTS.md` at `fb29ef6`; this page summarizes it.[^alerts]
 
 ## What runs
 
