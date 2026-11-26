@@ -1,25 +1,24 @@
 # 7. Liquidations
 
-## Euler's settings
+## Euler settings
 
-- **Liquidation lines:** 92% against sUSDrf, 95% against USDrf.
-- **Bonus:** scales with how far the loan has fallen, capped at 15%. It is not a fixed 5%.
-- **Cool-off:** 1 second.[^liq]
+- Loans liquidate at 92% LTV against sUSDrf and 95% against USDrf.
+- The bonus grows with how far a loan has fallen, up to 15%. It is not a fixed 5%.
+- The cool-off is 1 second, so a liquidation can land in the next block.
 
-Seized sUSDrf sells into the EulerSwap pools in the same transaction, through Fynd ([09](09-routing-fynd.md)).
+The bonus formula is in Euler's [`Liquidation.sol`](https://github.com/euler-xyz/euler-vault-kit/blob/93a1de491531e54cbbcf0e5c8cacfe558f924867/src/EVault/modules/Liquidation.sol#L120-L150). The settings were read on chain at block 26,496,053.
+
+Liquidators sell seized sUSDrf into the EulerSwap pools in the same transaction, routed by Fynd ([09](09-routing-fynd.md)).
 
 ## Fabio's liquidator
 
-Build 3 instant-unstakes the seized sUSDrf as a RealFi-listed liquidator, repays the USDrf debt and sweeps the profit,
-in one transaction. It holds no inventory, and an unprofitable liquidation reverts.[^b3]
+Build 3 runs each liquidation in one transaction ([`RealFiLiquidator.sol` L115-L188](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/contracts/liquidator/RealFiLiquidator.sol#L115-L188)).
+RealFi lists it for instant unstake, so it turns the seized sUSDrf into USDrf, repays the debt, and sends the profit on.
+It holds no inventory, and it reverts any liquidation that would not profit ([`AUDIT-NOTES.md`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/docs/AUDIT-NOTES.md)
+section 4).
 
-## Funding liquidations with outside capital
+## Funding with outside capital
 
-A shared contract lends the capital to the liquidator inside one transaction, and reverts unless more than it lent is
-back by the end.
-
-Fabio, on the call of 2026-11-25: "we only do a drawdown in the event that in the exact same block you guys get more
-money returned." This contract is not built yet.
-
-[^liq]: `euler-vault-kit/src/EVault/modules/Liquidation.sol` lines 120 to 150. Read at block 26,496,053: `maxLiquidationDiscount()` 1500 and `liquidationCoolOffTime()` 1 on eUSDrf-1, eUSDrf-2 and eUSDC-143.
-[^b3]: [`RealFiStructures/docs/AUDIT-NOTES.md`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/docs/AUDIT-NOTES.md) sections 4.1 and 4.2.
+A shared contract lends capital to the liquidator inside one transaction. The transaction reverts unless more than the
+loan comes back by its end. Fabio described it on the call of 2026-11-25: "we only do a drawdown in the event that in
+the exact same block you guys get more money returned." It is not built yet.
