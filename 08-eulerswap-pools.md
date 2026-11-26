@@ -22,7 +22,7 @@ static; a fee hook or manager must track the rate.
 Bounded by the sUSDrf vault's 2M cap, the borrow vault's cash, and the cushion (fill at 99.7% of value against a 90%
 borrow LTV). Sales of sUSDrf are bounded by the account's sUSDrf.
 
-A separate USDC vault designated as the pools' primary borrow vault keeps other borrowers from using up that cash.
+A separate USDC EVK vault designated as a primary swap venue keeps other borrowers from using up that cash.
 
 ## Unwind
 
