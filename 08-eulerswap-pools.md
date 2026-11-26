@@ -49,16 +49,17 @@ At 90%, the borrow limit, a 2.2% fall in Euler's sUSDrf price reaches liquidatio
 
 ## Repaying the loans
 
-Loops buying sUSDrf repay the loans. Without buyers, the pool unstakes: 7 days for a USDrf loan, or at once if RealFi
-lists the pool for instant unstake. A USDC loan then also waits for RealFi's Safe to approve the redemption, with no SLA
+Loops buying sUSDrf repay the loans. Without buyers, the pool's owner unstakes the sUSDrf: 7 days for a USDrf loan, or at
+once if RealFi lists the owner for instant unstake. A USDC loan then also waits for RealFi's Safe to approve the redemption, with no SLA
 ([`OPEN-ITEMS.md`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/docs/OPEN-ITEMS.md) E7).
 
-RealFi must list each pool before it can receive USDrf or sUSDrf.
+RealFi must list each pool before it can receive USDrf or sUSDrf, and must allowlist the owner before it can redeem USDrf
+for USDC.
 
 ## How a pool tracks RealFi's rate
 
-A swap hook prices each trade at RealFi's live rate, with no keeper. EulerSwap calls `getFee` on every swap
-([`QuoteLib.sol` L20-L29](https://github.com/euler-xyz/euler-swap/blob/dd936d2baaacb9064cf919b1fb45ecaa002d2751/src/libraries/QuoteLib.sol#L20-L29)), as the shMON exit desk on Monad does today. The fork used a fixed price, a 0.30% fee
+A swap hook tracks RealFi's live rate with no keeper. EulerSwap calls its `getFee` on every swap
+([`QuoteLib.sol` L20-L29](https://github.com/euler-xyz/euler-swap/blob/dd936d2baaacb9064cf919b1fb45ecaa002d2751/src/libraries/QuoteLib.sol#L20-L29)), and its `afterSwap` moves the pool's price when the rate drifts. The shMON exit desk on Monad runs this today. The fork used a fixed price, a 0.30% fee
 and 100k sUSDrf per pool ([`Pools.s.sol`](sources/fork/script/Pools.s.sol)); the mainnet fee and owner are open.
 
 [^health]: Own sUSDrf = sUSDrf bought × (0.997 × pool price × debt price / (loan level × Euler's sUSDrf price) − 1), with pool price 1.264628 USDrf per sUSDrf and Euler prices of $1.2755 (sUSDrf) and $1.0104 (USDrf). Checked on the fork: the RealFi USDC pool held 342,325 sUSDrf, worth $392,966 to Euler at 90%, against 304,334 USDC of debt.
