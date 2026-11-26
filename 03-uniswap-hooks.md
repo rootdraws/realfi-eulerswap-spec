@@ -8,12 +8,10 @@
 
 ## Fabio's pool hooks (Build 2)
 
-Each pool is two contracts, because one would not fit Ethereum's 24 KB limit. The hook answers Uniswap's calls, and the
-treasury holds the LPs' money and the rules.[^hook]
+Each pool is a hook plus a treasury that holds the LPs' money, split to fit the 24 KB limit.[^hook]
 
 - **Between swaps,** the LPs' money sits in lending vaults and earns: pool 1's USDC in Aave's USDC wrapper and its USDrf in
   eUSDrf-2, pool 2's USDrf in eUSDrf-1 and its sUSDrf in esUSDrf-1.
-- **On each swap,** the hook adds a position for that one swap and removes it right after.
 - **On a buy above $1,** the hook mints new USDrf 1:1 through RealFi instead of selling the LPs' USDrf. Pool 2 does the
   same at sUSDrf's fair value, staking new sUSDrf.
 - **On a sell below $1,** the seller pays a fee that rises with the discount, up to 5%.

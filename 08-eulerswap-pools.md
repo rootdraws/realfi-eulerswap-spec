@@ -12,15 +12,8 @@ pays the seller with a loan from that cluster's vault.[^es]
 | RWA B | sUSDrf | USDC | esUSDrf-1 | eUSDC-69 |
 | RWA C | sUSDrf | USDrf | esUSDrf-1 | eUSDrf-1 |
 
-## How one sale works
-
-1. A seller sends USDrf into pool A.
-2. The pool deposits it into eUSDrf-2, where it becomes the pool account's collateral.
-3. The pool borrows USDC from eUSDC-143 and pays the seller.
-4. Euler checks the account's loan once, at the end. If it breaks the 93% limit, the whole sale reverts.
-5. Later, RealFi redeems the USDrf for USDC, and the USDC repays the loan.
-
-Each pool trades from its own Euler sub-account, because one Euler account may owe only one vault at a time.
+Each pool trades from its own Euler sub-account, since an account may owe one vault at a time. The bought token becomes
+that account's collateral, and the sale reverts if the loan breaks its limit.
 
 ## Settings used on the fork
 
