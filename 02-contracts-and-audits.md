@@ -46,9 +46,10 @@ Upgradeable (UUPS, no timelock); solc 0.8.35; OpenZeppelin 5.4.0. Full design, r
 | OZ uniswap-hooks | [`uniswap-hooks/audits`](https://github.com/OpenZeppelin/uniswap-hooks/tree/master/audits): v1.0 and v1.1; `ReHypothecationHook` not covered |
 | Tycho router | [`tycho-execution/docs/audits`](https://github.com/propeller-heads/tycho-execution/tree/main/docs/audits): 2025-03-04, 2025-08-05, 2026-05-15 |
 
-Open internal findings:
+Known limits:
 
-- When pool 1's USDrf is nearly all lent out, a round trip pays up to ~$750, taken from LPs.
+- Rehypothecation swaps are limited in capacity when utilization is high.
+- Eulerswap swaps are limited in capacity, when utilization is high.
 - A RealFi pause of instant unstake blocks the de-lever but not an external liquidation; the keeper and monitor alert on it.
 
 [^v]: Addresses: `ag-euler/contracts/realfi-ethereum/deployed-1.env`. Read at block 26,496,053: `LTVFull`, `caps`, `computeInterestRateView`, `maxLiquidationDiscount`, `interestFee`, `governorAdmin`.
