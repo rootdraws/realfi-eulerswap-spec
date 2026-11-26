@@ -1,0 +1,146 @@
+{
+  "network": {
+    "chainId": 1,
+    "fork": true,
+    "usdcSource": "hold"
+  },
+  "roles": {
+    "admin": "deployer",
+    "keeper": "KEEPER_PRIVATE_KEY",
+    "guardian": "GUARDIAN_PRIVATE_KEY",
+    "liquidatorBot": "LIQUIDATOR_BOT_PRIVATE_KEY",
+    "profitReceiver": "0x4f894Bfc9481110278C356adE1473eBe2127Fd3C",
+    "poolInitializer": "deployer",
+    "poolSeeder": "deployer"
+  },
+  "external": {
+    "usdc": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+    "permit2": "0x000000000022D473030F116dDEE9F6B43aC78BA3",
+    "euler": {
+      "evc": "0x0C9a3dd6b8F28529d72d7f9cE918D493519EE383",
+      "eVaultFactory": "0x29a56a1b8214D9Cf7c5561811750D5cBDb45CC8e",
+      "eVaultImplementation": "0x8Ff1C814719096b61aBf00Bb46EAd0c9A529Dd7D",
+      "routerFactory": "0x70B3f6F61b7Bf237DF04589DdAA842121072326A",
+      "kinkIrmFactory": "0xcAe0A39B45Ee9C3213f64392FA6DF30CE034C9F9",
+      "protocolConfig": "0x4cD6BF1D183264c02Be7748Cb5cd3A47d013351b",
+      "sequenceRegistry": "0xEADDD21618ad5Deb412D3fD23580FD461c106B54",
+      "balanceTracker": "0x0D52d06ceB8Dcdeeb40Cfd9f17489B350dD7F8a3",
+      "accountLens": "0x2C5C13e4600AAbf77c1FdaA7b63d2D654DdFf7C5",
+      "vaultLens": "0x4A7Bc3bf4db4dD6eEE1b2c27A7C9e35A6fD14bDE",
+      "oracleLens": "0x4bCfa9761816beA3fe0beb15bDA2324aff84A795"
+    },
+    "v4": {
+      "poolManager": "0x000000000004444c5dc75cB358380D2e3dE08A90",
+      "positionManager": "0xbD216513d74C8cf14cf4747E6AaA6420FF64ee9e",
+      "stateView": "0x7fFE42C4a5DEeA5b0feC41C94C136Cf115597227",
+      "v4Quoter": "0x99bd42B2B22e531f283b7F8a86dFf631EB16A9D1",
+      "universalRouter": "0x23617e59A5925b2A4Bf75d73ff6711cD0b29De85"
+    },
+    "morpho": {
+      "blue": "0xBBBBBbbBBb9cC5e90e3b3Af64bdAF62C37EEFFCb",
+      "metaMorphoFactoryV11": "0x1897A8997241C1cD4bD0698647e4EB7213535c24",
+      "adaptiveCurveIrm": "0x870aC11D48B15DB9a138Cf899d20F13F79Ba00BC",
+      "chainlinkOracleV2Factory": "0x3A7bB36Ee3f3eE32A60e9f2b33c1e5f2E83ad766"
+    },
+    "paxg": "0x45804880De22913dAFE09f4980848ECE6EcbAf78",
+    "aave": {
+      "waEthUSDC": "0xD4fa2D31b7968E448877f69A96DE69f5de8cD23E",
+      "pool": "0x87870Bca3F3fD6335C3F4ce8392D69350B4fA4E2",
+      "aEthUSDC": "0x98C23E9d8f34FEFb1B7BD6a91B7FF122F4e16F5c",
+      "stataFactory": "0xCb0b5cA20b6C5C02A9A3B2cE433650768eD2974F"
+    }
+  },
+  "realfi": {
+    "usdrf": "0xD75647217206052F6090678905026AA374431563",
+    "susdrf": "0x8f4507d315acf966Fe21F9f4feE4F7e1A6d4c400",
+    "mintController": "0x1a4c017A948728B156Ef4D3377E7959FB7d9E783",
+    "usdrfController": "0xC482A65802075c9770B4c8E0F37C271c263155b0",
+    "stakeDesk": "0x0CDf9283D79E7fFd421F8065f207dFeA6C41dA3b",
+    "allowlist": "0x763267fa41Fc4a1aE5E6DC0da410815fBcA96b53",
+    "accessList": "0xE7Ab45F75cfDf8E6B0161957759a5faC87b7ACB0",
+    "listings": "external"
+  },
+  "feeds": {
+    "usdrf": {
+      "aggregator": "0xfd73818CE104EdECb96fb902Bf5ef7Ec840AFD08",
+      "maxStaleness": 46800
+    },
+    "usdc": {
+      "fixed": "1"
+    }
+  },
+  "build1": {
+    "vaultName": "RealFi USDC Vault",
+    "vaultSymbol": "rfUSDC",
+    "depositAllowlist": {
+      "enabled": true,
+      "accounts": []
+    },
+    "euler": {
+      "mode": "existing",
+      "existing": {
+        "router": "0x6eE2056AD473D46efAdCDA12529686D60d0E775B",
+        "eSusdrf": "0x0e10056d88084D76A7df6CC612330aF1B60B0130",
+        "eUsdrf": "0xEf240d6f1f2373bE393153F3125a3B514b204775",
+        "usdcVault": "0x3c089C265A86eCFB9BA6D5a3EFBE27eABa29E6c4",
+        "fromBlock": 26460664,
+        "governor": "0x4f894Bfc9481110278C356adE1473eBe2127Fd3C"
+      },
+      "borrowLtvBps": 9000,
+      "liquidationLtvBps": 9200,
+      "caps": {
+        "susdrf": {
+          "supply": {
+            "raw": 12812
+          },
+          "borrow": {
+            "raw": 1
+          }
+        },
+        "usdrf": {
+          "supply": {
+            "raw": 12812
+          },
+          "borrow": {
+            "raw": 0
+          }
+        }
+      },
+      "maxLiquidationDiscountBps": 1500
+    }
+  },
+  "build2": {
+    "lpName": "AlphaGrowth USDrf/USDC LP",
+    "lpSymbol": "agLP-USDrf-USDC",
+    "range": {
+      "tickLower": -100,
+      "tickUpper": 0
+    },
+    "startPrice": "0.999",
+    "seed": "later",
+    "usdrfVenue": "eUsdrf",
+    "usdcVenue": {
+      "aave": "0x531E90a2376902DE8915789Fcc1075e3B0c153E7"
+    },
+    "pool2": {
+      "lpName": "AlphaGrowth sUSDrf/USDrf LP",
+      "lpSymbol": "agLP-sUSDrf-USDrf",
+      "tickSpacing": 1,
+      "range": {
+        "lower": -202,
+        "upper": 0
+      },
+      "startPrice": "0.998",
+      "seed": "later",
+      "usdrfVenue": "0x0F4E2AF3042FdECC3A10707252e8d617DB3B35c3",
+      "susdrfVenue": "0x0Ee3807A399BFC5F58ed88faEf1a4A40F0EA0601",
+      "stake": {
+        "maxPerSwap": "500000000000"
+      }
+    }
+  },
+  "morpho": {
+    "enabled": false,
+    "oracle": "0x000000000000000000000000000000000000dEaD"
+  }
+}
