@@ -33,10 +33,14 @@ Fynd splits a large sale between the RealFi and RWA pools in one transaction, dr
 - A pool borrows only the cash left in its borrow vault, unless a USDC EVK vault is designated as its primary swap venue.
 - A pool sells only the sUSDrf it holds.
 
-A pool pays 99.7% of value but borrows at most 90%, so it must hold some sUSDrf of its own. For a pool that buys 1M
+An Eulerswap pool pays 99.7% of value but borrows at most 90%.
+
+This means that the Owner of the Pool must hold sUSDrf as collateral to maintain the health of the Eulerswap Pool. 
+
+For a pool that buys 1M
 sUSDrf:[^health]
 
-| Pool | Own sUSDrf at 90% LTV | Own sUSDrf at 80% LTV |
+| Pool | 90% LTV | 80% LTV |
 |---|---|---|
 | sUSDrf <> USDC | 98k sUSDrf ($126k) | 236k sUSDrf ($301k) |
 | sUSDrf <> USDrf | 110k sUSDrf ($140k) | 248k sUSDrf ($316k) |
