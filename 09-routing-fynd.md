@@ -58,8 +58,11 @@ our meeting with Propeller Heads on 2026-11-26:
 A firm that trades its own capital through Fynd owes Propeller Heads nothing. A firm that charges others for routing
 through Fynd owes Propeller Heads 20% of that revenue ([`LICENSE.md`](https://github.com/propeller-heads/fynd/blob/c7ec56515823c684f4acf9bf51e7a9fee13f3e85/LICENSE.md) sections 1.11, 1.13 and 1.15).
 
-## What is left to build
+## What we offer
 
-- We need to run Fynd on Ethereum and confirm it routes across all four pools.
-- We need to choose who owns the pool accounts, and the fee.
-- We need to add the pool checks to the monitor ([05](05-alerts.md)).
+Fynd already handles the routing these pools need, so we can offer it either way:
+
+- If Propeller Heads adds EulerSwap pools to the hosted API, partners can call it directly with their own key.
+- If it does not, we run our own Fynd instance, which already reads EulerSwap v2 pools, and serve its API to partners.
+
+We set the pool owners, the fee and the pool monitoring ([05](05-alerts.md)) together with each partner.
