@@ -22,8 +22,10 @@ move on its own, so a manager or fee hook must track RealFi's rate.
 
 ## Both clusters in one trade
 
-Fynd can fill one order through the RealFi and RWA pools together, drawing USDC from eUSDC-143 and eUSDC-69 at once. On
-the fork, 800k sUSDrf split across both paid 1,008,667 USDC in one transaction ([10](10-testing.md)).
+A large sUSDrf sale can draw on the USDC in both clusters. Fynd splits the order between the RealFi pool, which borrows
+from eUSDC-143, and the RWA pool, which borrows from eUSDC-69. Uniswap v4 settles both legs in a single transaction.
+
+On the fork, one transaction sold 800k sUSDrf this way for 1,008,667 USDC ([10](10-testing.md)).
 
 ## Economics
 
