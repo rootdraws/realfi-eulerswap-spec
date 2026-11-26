@@ -22,7 +22,7 @@ A sale of sUSDrf to a pool is paid with a loan. A purchase of sUSDrf from a pool
 The pools' sUSDrf earns RealFi's yield above the borrow rate while it waits for buyers. Wave, as the USDC lender, earns
 the borrow rate, and earns the fee and the carry too if it runs a pool.
 
-## Large orders
+## Splitting large orders across both clusters
 
 Fynd splits a large sale between the RealFi and RWA pools in one transaction, drawing on both USDC vaults. On the fork,
 800k sUSDrf sold for 1,008,667 USDC, a 0.30% cost that is the pool fee alone ([10](10-testing.md)).
@@ -48,7 +48,7 @@ lists the pool for instant unstake. A USDC loan then also waits for RealFi's Saf
 
 RealFi must list each pool before it can receive USDrf or sUSDrf.
 
-## Pricing
+## How a pool tracks RealFi's rate
 
 A swap hook prices each trade at RealFi's live rate, with no keeper. EulerSwap calls `getFee` on every swap
 ([`QuoteLib.sol` L20-L29](https://github.com/euler-xyz/euler-swap/blob/dd936d2baaacb9064cf919b1fb45ecaa002d2751/src/libraries/QuoteLib.sol#L20-L29)), as the shMON exit desk on Monad does today. The fork used a fixed price, a 0.30% fee
