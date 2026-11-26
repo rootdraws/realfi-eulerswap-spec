@@ -8,16 +8,19 @@ README; each refuses a non-fork node.
 | Builds 1 to 3 | `deploy --env mainnet-fork --impersonate-deployer` | Done |
 | RealFi listings | `realfi-list.sh` | Done |
 | RWA Safe batch | `safe-batch.sh` | Done |
-| Lenders and cushions | `load.sh` | 7.5M USDC, 3M USDrf; 100k cushion per pool |
-| Pools | `script/Pools.s.sol` | Deployed (the run also deployed the two sUSDrf to USDC pools since dropped) |
+| Lenders and pool stock | `load.sh` | 7.5M USDC, 3M USDrf; 100k sUSDrf per pool |
+| Pools | `script/Pools.s.sol` | Four deployed |
 | Split trade | `split-swap.sh` | See below |
 
 | Test | Result |
 |---|---|
-| 100k USDrf quote, each USDrf pool | 99,700 USDC |
-| 100k sUSDrf quote, each sUSDrf to USDrf pool | 125,984 USDrf |
-| 700k USDrf, one pool | Reverts (400k supply-cap room) |
-| 700k USDrf, split RealFi and RWA, one call | 697,900 USDC; 348,950 borrowed per pool |
+| Quote 100k sUSDrf to USDC, and to USDrf, each pool | 126,083 |
+| Quote 50k USDC or USDrf to sUSDrf, each pool | 39,419 sUSDrf |
+| Sell 800k sUSDrf, split RealFi and RWA, one call | 1,008,667 USDC; 504,334 borrowed per pool |
+| Buy with 400k USDC, split, one call | 315,350 sUSDrf; each pool's loan down 200,000 |
+
+An earlier run tested one-way USDrf to USDC pools: 700k into one pool reverted on the supply cap, and the same 700k split
+across both clusters filled.
 
 Deviations from live config: profit receiver set to the Safe; deploy check accepts eUSDrf-2's 15% max discount (Fabio's
 check expects 5%); balances written to storage.
