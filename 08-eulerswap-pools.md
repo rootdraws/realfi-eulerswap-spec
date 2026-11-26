@@ -38,8 +38,8 @@ sUSDrf:[^health]
 
 | Pool | Own sUSDrf at 90% LTV | Own sUSDrf at 80% LTV |
 |---|---|---|
-| sUSDrf <> USDC | 98k | 236k |
-| sUSDrf <> USDrf | 110k | 248k |
+| sUSDrf <> USDC | 98k sUSDrf ($126k) | 236k sUSDrf ($301k) |
+| sUSDrf <> USDrf | 110k sUSDrf ($140k) | 248k sUSDrf ($316k) |
 
 At 90%, the borrow limit, a 2.2% fall in Euler's sUSDrf price reaches liquidation.
 
