@@ -50,12 +50,12 @@ At 90%, the borrow limit, a 2.2% fall in Euler's sUSDrf price reaches liquidatio
 
 ## Repaying the loans without buyers
 
-The pool's owner unstakes the sUSDrf: 7 days for a USDrf loan, or at
-once if integrated into RealFi permissioned instant unstake vault. A USDC loan then also waits for RealFi's Safe to approve the redemption, with no SLA
-([`OPEN-ITEMS.md`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/docs/OPEN-ITEMS.md) E7).
+| Loan | The pool's owner | Time |
+|---|---|---|
+| USDrf | Unstakes the sUSDrf | 7 days, or immediate through RealFi's permissioned instant unstake vault |
+| USDC | Unstakes, then redeems the USDrf for USDC | The same, plus RealFi Safe approval of the redemption, with no SLA ([`OPEN-ITEMS.md`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/docs/OPEN-ITEMS.md) E7) |
 
-RealFi must list each pool before it can receive USDrf or sUSDrf, and must allowlist the owner before it can redeem USDrf
-for USDC.
+RealFi must list each pool and allowlist its owner first.
 
 ## How a pool tracks RealFi's rate
 
