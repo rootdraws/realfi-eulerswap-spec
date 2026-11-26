@@ -33,13 +33,12 @@ Fynd splits a large sale between the RealFi and RWA pools in one transaction, dr
 - A pool borrows only the cash left in its borrow vault, unless a USDC EVK vault is designated as its primary swap venue.
 - A pool sells only the sUSDrf it holds.
 
-A pool pays 99.7% of value but borrows at most 90%, so it must hold its own sUSDrf. The table gives that sUSDrf as a
-share of the sUSDrf the pool buys:[^health]
+A pool pays 99.7% of value but borrows at most 90%, so it must hold some sUSDrf of its own. For a pool that buys 1M
+sUSDrf:[^health]
 
-| Pool keeps its loan at | sUSDrf <> USDC pools | sUSDrf <> USDrf pools |
-|---|---|---|
-| 90% LTV, the borrow limit (2.2% from liquidation) | 9.8% | 11.0% |
-| 80% LTV | 23.6% | 24.8% |
+- A sUSDrf <> USDC pool holds 98k sUSDrf to sit at the 90% borrow limit, or 236k to sit at 80%.
+- A sUSDrf <> USDrf pool holds 110k sUSDrf to sit at 90%, or 248k to sit at 80%.
+- At 90% the pool is a 2.2% fall in Euler's sUSDrf price from liquidation.
 
 ## Repaying the loans
 
