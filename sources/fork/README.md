@@ -1,6 +1,6 @@
 # Lender-funded RealFi pools: local mainnet fork
 
-A Hardhat fork of Ethereum (chain id 1) from the local archive node, with Fabio's RealFiStructures builds and four
+A Hardhat fork of Ethereum (chain id 1) from the local archive node, with the RealFiStructures builds and four
 EulerSwap pools that trade sUSDrf both ways against loans from our Euler vaults.
 
 | Port | What |
@@ -10,7 +10,7 @@ EulerSwap pools that trade sUSDrf both ways against loans from our Euler vaults.
 
 Built in this order (each script refuses anything but the fork):
 
-1. Fabio's builds 1 to 3: `yarn workspace @realfi-structures/deploy deploy --env mainnet-fork --config <this folder>/fabio-fork.json --confirm-chain 1 --impersonate-deployer 0x501107fe590c8F9b81c00b81867fD19e0d9c0253`. The config copy names the Safe as profit receiver and allows eUSDrf-2's live 15% liquidation bonus. Book: `RealFiStructures/deploy/deployments/mainnet-fork/addresses.json`.
+1. Builds 1 to 3: `yarn workspace @realfi-structures/deploy deploy --env mainnet-fork --config <this folder>/fabio-fork.json --confirm-chain 1 --impersonate-deployer 0x501107fe590c8F9b81c00b81867fD19e0d9c0253`. The config copy names the Safe as profit receiver and allows eUSDrf-2's live 15% liquidation bonus. Book: `RealFiStructures/deploy/deployments/mainnet-fork/addresses.json`.
 2. `realfi-list.sh`: RealFi's listings, as its list admin.
 3. `safe-batch.sh`: the pending RWA Safe batch, as the Safe.
 4. `load.sh`: lenders put 4.5M USDC in eUSDC-143, 3M USDC in eUSDC-69 and 1.5M USDrf in each USDrf vault; each pool account gets 100k sUSDrf.
