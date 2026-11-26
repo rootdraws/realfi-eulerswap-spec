@@ -17,6 +17,12 @@ Fork parameters (`sources/fork/script/Pools.s.sol`): `concentration` 1e18 (flat)
 deploy, fee 0.30%, 100k sUSDrf per account as initial stock and cushion. Fee and owner for mainnet are open. The price is
 static; a fee hook or manager must track the rate.
 
+## Both clusters in one trade
+
+Fynd fills one order through the RealFi pool and the RWA pool together, and Uniswap v4 settles both legs at the end of
+the transaction. A large sale of sUSDrf borrows from eUSDC-143 and eUSDC-69 at once. On the fork, 800k sUSDrf split
+across both paid 1,008,667 USDC in one call ([10](10-testing.md)).
+
 ## Capacity
 
 Bounded by the sUSDrf vault's 2M cap, the borrow vault's cash, and the cushion (fill at 99.7% of value against a 90%
