@@ -2,7 +2,7 @@
 
 ## Live: Euler vaults
 
-Euler Vault Kit proxies from Euler's factory, deployed 2026-11-20, governed by the AlphaGrowth Safe.[^v]
+Euler Vault Kit proxies from Euler's factory, deployed 2026-11-20, governed by the AlphaGrowth Safe, a 3 of 9 multisig ([04](04-keys.md)).[^v]
 
 | Vault | Address | Cluster | Lends against |
 |---|---|---|---|
