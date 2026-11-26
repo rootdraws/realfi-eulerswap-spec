@@ -4,7 +4,7 @@
 |---|---|---|---|
 | `USDrfPoolHook` + `USDrfPoolTreasury` | USDrf/USDC | OZ `ReHypothecationHook` v1.3.0-rc.0 | No |
 | `SUSDrfPoolHook` + `SUSDrfPoolTreasury` | sUSDrf/USDrf | OZ `ReHypothecationHook` v1.3.0-rc.0 | No |
-| EulerSwap v2 `UniswapHook` | the six pools in [08](08-eulerswap-pools.md) | Euler | Yes ([02](02-contracts-and-audits.md)) |
+| EulerSwap v2 `UniswapHook` | the four pools in [08](08-eulerswap-pools.md) | Euler | Yes ([02](02-contracts-and-audits.md)) |
 
 ## Fabio's hooks against OZ `ReHypothecationHook`
 

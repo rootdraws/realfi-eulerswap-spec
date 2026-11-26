@@ -49,7 +49,7 @@ Fynd owes Propeller Heads 20% of that revenue.[^lic]
 
 ## Left to build
 
-- Run Fynd on Ethereum and confirm it routes across all six pools.
+- Run Fynd on Ethereum and confirm it routes across all four pools.
 - Choose who owns the pool accounts, and the fee.
 - Add the pool checks to the monitor ([05](05-alerts.md)).
 

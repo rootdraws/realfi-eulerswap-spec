@@ -8,14 +8,14 @@ README; each refuses a non-fork node.
 | Builds 1 to 3 | `deploy --env mainnet-fork --impersonate-deployer` | Done |
 | RealFi listings | `realfi-list.sh` | Done |
 | RWA Safe batch | `safe-batch.sh` | Done |
-| Lenders and cushions | `load.sh` | 7.5M USDC, 3M USDrf; six 100k cushions |
-| Six pools | `script/Pools.s.sol` | Deployed |
+| Lenders and cushions | `load.sh` | 7.5M USDC, 3M USDrf; 100k cushion per pool |
+| Pools | `script/Pools.s.sol` | Deployed (the run also deployed the two sUSDrf to USDC pools since dropped) |
 | Split trade | `split-swap.sh` | See below |
 
 | Test | Result |
 |---|---|
 | 100k USDrf quote, each USDrf pool | 99,700 USDC |
-| 100k sUSDrf quote, each sUSDrf pool | 125,984 USDC or USDrf |
+| 100k sUSDrf quote, each sUSDrf to USDrf pool | 125,984 USDrf |
 | 700k USDrf, one pool | Reverts (400k supply-cap room) |
 | 700k USDrf, split RealFi and RWA, one call | 697,900 USDC; 348,950 borrowed per pool |
 

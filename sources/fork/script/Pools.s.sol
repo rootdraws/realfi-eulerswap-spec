@@ -3,11 +3,10 @@ pragma solidity ^0.8.24;
 
 import {Script, console2} from "forge-std/Script.sol";
 
-// Fork only. Six lender-funded EulerSwap v2 pools on Ethereum, three in the RealFi cluster and the same three in the RWA
-// cluster. Each pool buys a RealFi token and pays with a loan from that cluster's vault:
+// Fork only. Four lender-funded EulerSwap v2 pools on Ethereum, two per cluster; Fynd chains them for sUSDrf to USDC:
 //   USDrf in, USDC out    (USDrf collateral, USDC loan)
-//   sUSDrf in, USDC out   (sUSDrf collateral, USDC loan)
 //   sUSDrf in, USDrf out  (sUSDrf collateral, USDrf loan)
+// Sub-accounts 1, 3, 4 and 6 are kept from the six-pool run, so the four pools keep their addresses.
 // Each pool trades from its own EVC sub-account of OWNER (one account may owe one vault at a time). Flat price, 0.30% fee.
 // Run: forge script script/Pools.s.sol --rpc-url http://127.0.0.1:8548 --unlocked --sender <OWNER> --broadcast
 
@@ -56,10 +55,8 @@ contract Pools is Script {
         vm.startBroadcast();
         // token order: sUSDrf 0x8f45 < USDC 0xA0b8 < USDrf 0xD756
         deploy("RealFi USDrf->USDC", sub(owner, 1), RF_USDC, RF_USDRF, RF_USDC, address(0), USDC_ROOM, 0, 1e18, 1e18);
-        deploy("RealFi sUSDrf->USDC", sub(owner, 2), RF_SUSDRF, RF_USDC, address(0), RF_USDC, 0, USDC_ROOM, susdrfPx, 1e18);
         deploy("RealFi sUSDrf->USDrf", sub(owner, 3), RF_SUSDRF, RF_USDRF, address(0), RF_USDRF, 0, USDRF_ROOM, susdrfPx, 1e18);
         deploy("RWA USDrf->USDC", sub(owner, 4), RWA_USDC, RWA_USDRF, RWA_USDC, address(0), USDC_ROOM, 0, 1e18, 1e18);
-        deploy("RWA sUSDrf->USDC", sub(owner, 5), RWA_SUSDRF, RWA_USDC, address(0), RWA_USDC, 0, USDC_ROOM, susdrfPx, 1e18);
         deploy("RWA sUSDrf->USDrf", sub(owner, 6), RWA_SUSDRF, RWA_USDRF, address(0), RWA_USDRF, 0, USDRF_ROOM, susdrfPx, 1e18);
         vm.stopBroadcast();
     }
