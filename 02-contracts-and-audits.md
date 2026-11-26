@@ -49,7 +49,7 @@ Upgradeable (UUPS, no timelock); solc 0.8.35; OpenZeppelin 5.4.0. Full design, r
 Known limits:
 
 - Rehypothecation swaps are limited in capacity when utilization is high.
-- Eulerswap swaps are limited in capacity, when utilization is high, unless a separate USDC EVK Vault is designated as the primary Eulerswap pool.
+- Eulerswap swaps are limited in capacity, when utilization is high, unless a separate USDC EVK Vault is designated as a primary swap venue.
 - A RealFi pause of instant unstake blocks the de-lever but not an external liquidation; the keeper and monitor alert on it.
 
 [^v]: Addresses: `ag-euler/contracts/realfi-ethereum/deployed-1.env`. Read at block 26,496,053: `LTVFull`, `caps`, `computeInterestRateView`, `maxLiquidationDiscount`, `interestFee`, `governorAdmin`.
