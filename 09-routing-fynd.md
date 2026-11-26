@@ -60,9 +60,5 @@ through Fynd owes Propeller Heads 20% of that revenue ([`LICENSE.md`](https://gi
 
 ## What we offer
 
-Fynd already handles the routing these pools need, so we can offer it either way:
-
-- If Propeller Heads adds EulerSwap pools to the hosted API, partners can call it directly with their own key.
-- If it does not, we run our own Fynd instance, which already reads EulerSwap v2 pools, and serve its API to partners.
-
-We set the pool owners, the fee and the pool monitoring ([05](05-alerts.md)) together with each partner.
+Partners can use the hosted Fynd API, or our own Fynd instance, which already reads EulerSwap pools. We set the pool
+owners, fees and monitoring with each partner.
