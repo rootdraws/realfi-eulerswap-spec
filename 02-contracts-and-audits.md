@@ -28,11 +28,11 @@ Euler Vault Kit proxies from Euler's factory, deployed 2026-11-20, governed by t
 Upgradeable (UUPS, no timelock); solc 0.8.35; OpenZeppelin 5.4.0. Full design, roles, limitations and findings:
 `RealFiStructures/docs/AUDIT-NOTES.md`.
 
-| Build | Contracts | Lines |
-|---|---|---|
-| 1. Loop vault | `core/*`, `adapters/realfi/RealFiAdapter.sol`, `UnstakeEscrow.sol`, `adapters/market/EulerMarketAdapter.sol` | ~3,000 |
-| 2. Pool hooks | `hooks/USDrfPool{Hook,Treasury}.sol`, `hooks/SUSDrfPool{Hook,Treasury}.sol`, `JitPoolQuoter.sol`, `hooks/vendor/oz-uniswap-hooks/` | ~4,600 |
-| 3. Liquidator | `liquidator/RealFiLiquidator.sol` | ~750 |
+| Build | Contracts |
+|---|---|
+| 1. Loop vault | `core/*`, `adapters/realfi/RealFiAdapter.sol`, `UnstakeEscrow.sol`, `adapters/market/EulerMarketAdapter.sol` |
+| 2. Pool hooks | `hooks/USDrfPool{Hook,Treasury}.sol`, `hooks/SUSDrfPool{Hook,Treasury}.sol`, `JitPoolQuoter.sol`, `hooks/vendor/oz-uniswap-hooks/` |
+| 3. Liquidator | `liquidator/RealFiLiquidator.sol` |
 
 ## Reviews
 
