@@ -23,7 +23,7 @@ Euler Vault Kit proxies from Euler's factory, deployed 2026-11-20, governed by t
 | Max liquidation discount | 15% |
 | Interest fee | 10%, to the Safe |
 
-## Built, not deployed: Fabio's builds
+## Built, not deployed:
 
 Upgradeable (UUPS, no timelock); solc 0.8.35; OpenZeppelin 5.4.0. Full design, roles, limitations and findings:
 `RealFiStructures/docs/AUDIT-NOTES.md`.
