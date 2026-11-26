@@ -14,7 +14,7 @@
 | Liquidity per swap | Full range | From the current price, sized to the LPs' holdings |
 | Fee | None | Rises as the price falls below par |
 | Buys above par | Filled by LPs | Minted (pool 1) or staked (pool 2) through RealFi |
-| PoolManager lacks the token | Not handled | Paid in ERC-6909 claims |
+| PoolManager lacks the token | Swap reverts | Paid in ERC-6909 claims |
 | Upgrades | Not upgradeable | UUPS, admin only |
 | First seed | Anyone | Admin only |
 
