@@ -1,6 +1,8 @@
 # 8. EulerSwap pools
 
-EulerSwap v2 as deployed by Euler (factory `0xD05213331221fAB8a3C387F2affBb605Bb04DF5F`), one EVC sub-account per pool.
+The pools run EulerSwap v2 from Euler's factory
+[`0xD05213331221fAB8a3C387F2affBb605Bb04DF5F`](https://etherscan.io/address/0xD05213331221fAB8a3C387F2affBb605Bb04DF5F).
+Each pool trades from its own EVC sub-account.
 
 | Pool | Pair | Supply vaults | Borrow vault |
 |---|---|---|---|
@@ -9,24 +11,26 @@ EulerSwap v2 as deployed by Euler (factory `0xD05213331221fAB8a3C387F2affBb605Bb
 | RWA A | sUSDrf <> USDC | esUSDrf-1, eUSDC-69 | eUSDC-69 |
 | RWA B | sUSDrf <> USDrf | esUSDrf-1, eUSDrf-1 | eUSDrf-1 |
 
-- **sUSDrf in:** the pool borrows the output token against the sUSDrf it receives.
-- **sUSDrf out:** the incoming USDC or USDrf repays the loan, and the pool pays from its own sUSDrf; sUSDrf is never
-  borrowed.
+- When a trader sells sUSDrf, the pool borrows USDC or USDrf against it.
+- When a trader buys sUSDrf, the incoming USDC or USDrf repays the loan. The pool never borrows sUSDrf.
 
-Fork parameters (`sources/fork/script/Pools.s.sol`): `concentration` 1e18 (flat), sUSDrf priced at RealFi's rate at
-deploy, fee 0.30%, 100k sUSDrf per account as initial stock and cushion. Fee and owner for mainnet are open. The price is
-static; a fee hook or manager must track the rate.
+## Settings
+
+The fork used a flat curve, sUSDrf priced at RealFi's rate, a 0.30% fee and 100k sUSDrf per pool
+([`Pools.s.sol`](sources/fork/script/Pools.s.sol)). The mainnet fee and owner are not chosen yet. The price does not
+move on its own, so a manager or fee hook must track RealFi's rate.
 
 ## Both clusters in one trade
 
-Fynd fills one order through the RealFi pool and the RWA pool together, and Uniswap v4 settles both legs at the end of
-the transaction. A large sale of sUSDrf borrows from eUSDC-143 and eUSDC-69 at once. On the fork, 800k sUSDrf split
-across both paid 1,008,667 USDC in one call ([10](10-testing.md)).
+Fynd can fill one order through the RealFi and RWA pools together, drawing USDC from eUSDC-143 and eUSDC-69 at once. On
+the fork, 800k sUSDrf split across both paid 1,008,667 USDC in one transaction ([10](10-testing.md)).
 
 ## Capacity
 
-Bounded by the sUSDrf vault's 2M cap, the borrow vault's cash, and the cushion (fill at 99.7% of value against a 90%
-borrow LTV). Sales of sUSDrf are bounded by the account's sUSDrf.
+- The sUSDrf vault caps deposits at 2M.
+- A pool can borrow only the cash its borrow vault holds.
+- A pool fills at 99.7% of value but borrows at most 90%, so its own sUSDrf covers the gap.
+- A pool can sell only the sUSDrf it holds.
 
 A separate USDC EVK vault designated as a primary swap venue keeps other borrowers from using up that cash.
 
@@ -36,7 +40,7 @@ Buyers of sUSDrf repay the loans directly. Otherwise:
 
 | Loan | Repaid by | Time |
 |---|---|---|
-| USDC | Unstake, then USDrf redemption | 7 days, then RealFi Safe approval; no SLA ([`OPEN-ITEMS.md`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/docs/OPEN-ITEMS.md) E7) |
-| USDrf | Unstake | 7 days; immediate if RealFi lists the account's owner contract for instant unstake |
+| USDC | Unstaking, then USDrf redemption | 7 days, then RealFi Safe approval with no SLA ([`OPEN-ITEMS.md`](https://github.com/alphagrowth/RealFiStructures/blob/fb29ef6d1aab554e78905a6410e03ef03ad00456/docs/OPEN-ITEMS.md) E7) |
+| USDrf | Unstaking | 7 days, or immediate if RealFi lists the pool's owner contract for instant unstake |
 
-RealFi must list each pool on its access list before it can receive USDrf or sUSDrf.
+RealFi must list each pool before it can receive USDrf or sUSDrf.
