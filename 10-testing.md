@@ -12,6 +12,8 @@ with one script; [`sources/fork/README.md`](sources/fork/README.md) has the step
 
 ## Results
 
+These results come from the run at block 26,495,709 on 2026-11-25.
+
 | Trade | Result |
 |---|---|
 | Sell 100k sUSDrf into one pool | 126,083 USDC or USDrf |

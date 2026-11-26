@@ -31,7 +31,7 @@ Then run the test, with Node 22 and yarn on your PATH:
 REALFI_STRUCTURES=<path to RealFiStructures> zsh run.sh
 ```
 
-`run.sh` takes about five minutes and does five things:
+`run.sh` does five things:
 
 1. It deploys Builds 1 to 3 with the RealFiStructures deploy engine, signing as AlphaGrowth's deployer through the fork.
 2. It adds RealFi's listings by signing as RealFi's list admin.
